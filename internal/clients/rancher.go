@@ -36,8 +36,8 @@ const (
 	keyHost     = "host"
 
 	// Rancher credentials environment variable names
-	envUsername = "HASHICUPS_USERNAME"
-	envPassword = "HASHICUPS_PASSWORD"
+	envUsername = "RANCHER_USERNAME"
+	envPassword = "RANCHER_PASSWORD"
 )
 
 const (
