@@ -4,14 +4,14 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: orders.hashicups.template.jet.crossplane.io
+  name: orders.hashicups.rancher.jet.crossplane.io
 spec:
-  group: hashicups.template.jet.crossplane.io
+  group: hashicups.rancher.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - templatejet
+    - rancherjet
     kind: Order
     listKind: OrderList
     plural: orders
