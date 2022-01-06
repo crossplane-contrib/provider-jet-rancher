@@ -23,12 +23,12 @@ import (
 	"os"
 	"path/filepath"
 
-	tf "github.com/hashicorp/terraform-provider-hashicups/hashicups"
+	tf "github.com/rancher/terraform-provider-rancher2"
 
 	"github.com/crossplane-contrib/terrajet/pkg/pipeline"
 	// Comment out the line below instead of the above, if your Terraform
 	// provider uses an old version (<v2) of github.com/hashicorp/terraform-plugin-sdk.
-	// "github.com/crossplane-contrib/terrajet/pkg/types/conversion"
+	"github.com/crossplane-contrib/terrajet/pkg/types/conversion"
 
 	"github.com/crossplane-contrib/provider-jet-rancher/config"
 )
@@ -44,6 +44,6 @@ func main() {
 	resourceMap := tf.Provider().ResourcesMap
 	// Comment out the line below instead of the above, if your Terraform
 	// provider uses an old version (<v2) of github.com/hashicorp/terraform-plugin-sdk.
-	// resourceMap := conversion.GetV2ResourceMap(tf.Provider())
+	resourceMap := conversion.GetV2ResourceMap(tf.Provider())
 	pipeline.Run(config.GetProvider(resourceMap), absRootDir)
 }
