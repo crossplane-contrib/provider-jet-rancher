@@ -25,7 +25,7 @@ import (
 
 	tf "github.com/rancher/terraform-provider-rancher2/rancher2"
 
-	"github.com/crossplane-contrib/terrajet/pkg/pipeline"
+	"github.com/crossplane/terrajet/pkg/pipeline"
 	// Comment out the line below instead of the above, if your Terraform
 	// provider uses an old version (<v2) of github.com/hashicorp/terraform-plugin-sdk.
 	"github.com/crossplane/terrajet/pkg/types/conversion"

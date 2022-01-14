@@ -297,14 +297,10 @@ github.com/creack/pty v1.1.11/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ
 github.com/creasty/defaults v1.5.2/go.mod h1:FPZ+Y0WNrbqOVw+c6av63eyHUAl6pMHZwqLPvXUZGfY=
 github.com/crewjam/httperr v0.0.0-20190612203328-a946449404da/go.mod h1:+rmNIXRvYMqLQeR4DHyTvs6y0MEMymTz4vyFpFkKTPs=
 github.com/crewjam/saml v0.4.1/go.mod h1:vHcshzXm2WkPOV1dcToZa99cCB1h3nPiKLtLYK+erBE=
-github.com/crossplane-contrib/terrajet v0.2.1 h1:oTdBSYyHlKfWiwGBM9hClYU/BdWhMz490xwfQBDv11Q=
-github.com/crossplane-contrib/terrajet v0.2.1/go.mod h1:RUsskXE63KZE7EcvZ7WK4UzBQjc1+7IhelK+/gIa/Go=
 github.com/crossplane/crossplane-runtime v0.15.1-0.20211004150827-579c1833b513 h1:Sk3QurYYpy8x3c0DvTh9iGYFSv8WgdhnjCalNqNqlRI=
 github.com/crossplane/crossplane-runtime v0.15.1-0.20211004150827-579c1833b513/go.mod h1:gKix9Gq5kRzVe/4XOpwlFgG7OurzrYayviJxWZakhw0=
 github.com/crossplane/crossplane-tools v0.0.0-20210916125540-071de511ae8e h1:7UM4E9gNEzJ22JgRZqY2KBlkdMCAiHmKS96rcLANdME=
 github.com/crossplane/crossplane-tools v0.0.0-20210916125540-071de511ae8e/go.mod h1:3GzY5sP0PVePArghBh5K4fGzS/3kM0R/NAZn5s7LXqw=
-github.com/crossplane/terrajet v0.3.0 h1:w+j/bqZ6vUBlc0seb4Mr1/MO5W0STbckyv9lnD0QSfk=
-github.com/crossplane/terrajet v0.3.0/go.mod h1:fFjGal+3iF/D3XaxuTHw0xNHO+UslVhxNkNZITDXz44=
 github.com/cyphar/filepath-securejoin v0.2.2/go.mod h1:FpkQEhXnPnOthhzymB7CGsFk2G9VLXONKD9G7QGMM+4=
 github.com/dave/jennifer v1.4.1 h1:XyqG6cn5RQsTj3qlWQTKlRGAyrTcsk1kUmWdZBzRjDw=
 github.com/dave/jennifer v1.4.1/go.mod h1:7jEdnm+qBcxl8PC0zyp7vxcpSRnzXSt9r39tpTVGlwA=
@@ -1258,6 +1254,8 @@ github.com/tmc/grpc-websocket-proxy v0.0.0-20201229170055-e5319fda7802/go.mod h1
 github.com/tomnomnom/linkheader v0.0.0-20180905144013-02ca5825eb80/go.mod h1:iFyPdL66DjUD96XmzVL3ZntbzcflLnznH0fr99w5VqE=
 github.com/turkenh/terraform-plugin-sdk v1.17.2-patch1 h1:TRHWM1G6ZqjOj/lu61J/FkcxyFWScKENbcZ6UZV0LiU=
 github.com/turkenh/terraform-plugin-sdk v1.17.2-patch1/go.mod h1:wkvldbraEMkz23NxkkAsFS88A1R9eUiooiaUZyS6TLw=
+github.com/turkenh/terrajet v0.0.0-20220114225802-9f11209e5cac h1:kOgVHqb2xy9LHvutws1fzALHQDTFUXHc5vurKlAhgEE=
+github.com/turkenh/terrajet v0.0.0-20220114225802-9f11209e5cac/go.mod h1:fFjGal+3iF/D3XaxuTHw0xNHO+UslVhxNkNZITDXz44=
 github.com/ugorji/go v1.1.4/go.mod h1:uQMGLiO92mf5W77hV/PUCpI3pbzQx3CRekS0kk+RGrc=
 github.com/ugorji/go/codec v0.0.0-20181204163529-d75b2dcb6bc8/go.mod h1:VFNgLljTbGfSG7qAOspJ7OScBnGdDN/yBr0sguwnwf0=
 github.com/ulikunitz/xz v0.5.5/go.mod h1:2bypXElzHzzJZwzH67Y6wb67pO62Rzfn7BSiF4ABRW8=
