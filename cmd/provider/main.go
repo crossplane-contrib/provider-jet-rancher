@@ -32,6 +32,7 @@ import (
 	pconfig "github.com/crossplane-contrib/provider-jet-rancher/config"
 	"github.com/crossplane-contrib/provider-jet-rancher/internal/clients"
 	"github.com/crossplane-contrib/provider-jet-rancher/internal/controller"
+	"github.com/crossplane/terrajet/pkg/types/conversion"
 )
 
 func main() {
@@ -70,7 +71,8 @@ func main() {
 	setup := clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion)
 
 	rl := ratelimiter.NewGlobal(ratelimiter.DefaultGlobalRPS)
+	resourceMap := conversion.GetV2ResourceMap(tf.Provider())
 	kingpin.FatalIfError(apis.AddToScheme(mgr.GetScheme()), "Cannot add Rancher APIs to scheme")
-	kingpin.FatalIfError(controller.Setup(mgr, log, rl, setup, ws, pconfig.GetProvider(tf.Provider().ResourcesMap), 1), "Cannot setup Rancher controllers")
+	kingpin.FatalIfError(controller.Setup(mgr, log, rl, setup, ws, pconfig.GetProvider(resourceMap), 1), "Cannot setup Rancher controllers")
 	kingpin.FatalIfError(mgr.Start(ctrl.SetupSignalHandler()), "Cannot start controller manager")
 }
