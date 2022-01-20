@@ -31,13 +31,13 @@ import (
 )
 
 const (
-	keyUsername = "username"
-	keyPassword = "password"
-	keyHost     = "host"
+	keyApiUrl    = "api_url"
+	keyAccessKey = "access_key"
+	keySecretKey = "secret_key"
 
 	// Rancher credentials environment variable names
-	envUsername = "RANCHER_USERNAME"
-	envPassword = "RANCHER_PASSWORD"
+	envRancherAccessKey = "RANCHER_ACCESS_KEY"
+	envRancherSecretKey = "RANCHER_SECRET_KEY"
 )
 
 const (
@@ -88,12 +88,12 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 
 		// set provider configuration
 		ps.Configuration = map[string]interface{}{
-			"host": rancherCreds[keyHost],
+			keyApiUrl: rancherCreds[keyApiUrl],
 		}
 		// set environment variables for sensitive provider configuration
 		ps.Env = []string{
-			fmt.Sprintf(fmtEnvVar, envUsername, rancherCreds[keyUsername]),
-			fmt.Sprintf(fmtEnvVar, envPassword, rancherCreds[keyPassword]),
+			fmt.Sprintf(fmtEnvVar, envRancherAccessKey, rancherCreds[keyAccessKey]),
+			fmt.Sprintf(fmtEnvVar, envRancherSecretKey, rancherCreds[keySecretKey]),
 		}
 		return ps, nil
 	}
