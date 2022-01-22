@@ -5,8 +5,8 @@ PROJECT_NAME := provider-jet-rancher
 PROJECT_REPO := github.com/crossplane-contrib/$(PROJECT_NAME)
 
 export TERRAFORM_VERSION := 1.0.11
-export TERRAFORM_PROVIDER_SOURCE := rancher/terraform-provider-rancher2
-export TERRAFORM_PROVIDER_VERSION := 1.22.1
+export TERRAFORM_PROVIDER_SOURCE := rancher/rancher2
+export TERRAFORM_PROVIDER_VERSION := 1.22.2
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-rancher2
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/hashicorp/terraform-provider-hashicups/releases/download/v$(TERRAFORM_PROVIDER_VERSION)
 

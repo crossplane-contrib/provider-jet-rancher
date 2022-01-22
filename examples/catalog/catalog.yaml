@@ -1,0 +1,9 @@
+apiVersion: rancher2.rancher.jet.crossplane.io/v1alpha1
+kind: Catalog
+metadata:
+  name: hello-crossplane
+spec:
+  forProvider:
+    url: https://www.k8gb.io
+  providerConfigRef:
+    name: default
