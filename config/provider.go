@@ -37,8 +37,8 @@ func GetProvider(resourceMap map[string]*schema.Resource) *tjconfig.Provider {
 
 	pc := tjconfig.NewProvider(resourceMap, resourcePrefix, modulePath,
 		tjconfig.WithDefaultResourceFn(defaultResourceFn),
-		tjconfig.WithIncludeList([]string{
-			"rancher2_catalog"}))
+		tjconfig.WithSkipList([]string{
+			"rancher2_secret"}))
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions
