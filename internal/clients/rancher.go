@@ -31,7 +31,7 @@ import (
 )
 
 const (
-	keyApiUrl    = "api_url"
+	keyAPIURL    = "api_url"
 	keyAccessKey = "access_key"
 	keySecretKey = "secret_key"
 
@@ -88,7 +88,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 
 		// set provider configuration
 		ps.Configuration = map[string]interface{}{
-			keyApiUrl: rancherCreds[keyApiUrl],
+			keyAPIURL: rancherCreds[keyAPIURL],
 		}
 		// set environment variables for sensitive provider configuration
 		ps.Env = []string{
