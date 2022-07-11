@@ -17,13 +17,9 @@ limitations under the License.
 package controller
 
 import (
-	zz_workqueue "k8s.io/client-go/util/workqueue"
-	zz_ctrl "sigs.k8s.io/controller-runtime"
+	ctrl "sigs.k8s.io/controller-runtime"
 
-	zz_xplogging "github.com/crossplane/crossplane-runtime/pkg/logging"
-
-	zz_tjconfig "github.com/crossplane/terrajet/pkg/config"
-	zz_tjterraform "github.com/crossplane/terrajet/pkg/terraform"
+	"github.com/crossplane/terrajet/pkg/controller"
 
 	v2 "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/app/v2"
 	configactivedirectory "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/auth/configactivedirectory"
@@ -81,8 +77,8 @@ import (
 
 // Setup creates all controllers with the supplied logger and adds them to
 // the supplied manager.
-func Setup(mgr zz_ctrl.Manager, l zz_xplogging.Logger, wl zz_workqueue.RateLimiter, ps zz_tjterraform.SetupFn, ws *zz_tjterraform.WorkspaceStore, cfg *zz_tjconfig.Provider, concurrency int) error {
-	for _, setup := range []func(zz_ctrl.Manager, zz_xplogging.Logger, zz_workqueue.RateLimiter, zz_tjterraform.SetupFn, *zz_tjterraform.WorkspaceStore, *zz_tjconfig.Provider, int) error{
+func Setup(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		v2.Setup,
 		configactivedirectory.Setup,
 		configadfs.Setup,
@@ -136,7 +132,7 @@ func Setup(mgr zz_ctrl.Manager, l zz_xplogging.Logger, wl zz_workqueue.RateLimit
 		templaterole.Setup,
 		classv2.Setup,
 	} {
-		if err := setup(mgr, l, wl, ps, ws, cfg, concurrency); err != nil {
+		if err := setup(mgr, o); err != nil {
 			return err
 		}
 	}
