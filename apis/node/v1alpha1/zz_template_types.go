@@ -343,6 +343,60 @@ type DigitaloceanConfigParameters struct {
 	Userdata *string `json:"userdata,omitempty" tf:"userdata,omitempty"`
 }
 
+type HarvesterConfigObservation struct {
+}
+
+type HarvesterConfigParameters struct {
+
+	// CPU count
+	// +kubebuilder:validation:Optional
+	CPUCount *string `json:"cpuCount,omitempty" tf:"cpu_count,omitempty"`
+
+	// Disk bus
+	// +kubebuilder:validation:Optional
+	DiskBus *string `json:"diskBus,omitempty" tf:"disk_bus,omitempty"`
+
+	// Disk size (in GiB)
+	// +kubebuilder:validation:Optional
+	DiskSize *string `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
+
+	// Image name
+	// +kubebuilder:validation:Required
+	ImageName *string `json:"imageName" tf:"image_name,omitempty"`
+
+	// Memory size (in GiB)
+	// +kubebuilder:validation:Optional
+	MemorySize *string `json:"memorySize,omitempty" tf:"memory_size,omitempty"`
+
+	// NetworkData content of cloud-init, base64 is supported
+	// +kubebuilder:validation:Optional
+	NetworkData *string `json:"networkData,omitempty" tf:"network_data,omitempty"`
+
+	// Network model
+	// +kubebuilder:validation:Optional
+	NetworkModel *string `json:"networkModel,omitempty" tf:"network_model,omitempty"`
+
+	// Network name
+	// +kubebuilder:validation:Required
+	NetworkName *string `json:"networkName" tf:"network_name,omitempty"`
+
+	// SSH password
+	// +kubebuilder:validation:Optional
+	SSHPasswordSecretRef *v1.SecretKeySelector `json:"sshPasswordSecretRef,omitempty" tf:"-"`
+
+	// SSH username
+	// +kubebuilder:validation:Required
+	SSHUser *string `json:"sshUser" tf:"ssh_user,omitempty"`
+
+	// UserData content of cloud-init, base64 is supported
+	// +kubebuilder:validation:Optional
+	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
+
+	// Virtual machine namespace
+	// +kubebuilder:validation:Required
+	VMNamespace *string `json:"vmNamespace" tf:"vm_namespace,omitempty"`
+}
+
 type HetznerConfigObservation struct {
 }
 
@@ -359,6 +413,10 @@ type HetznerConfigParameters struct {
 	// Comma-separated list of network IDs or names which should be attached to the server private network interface
 	// +kubebuilder:validation:Optional
 	Networks *string `json:"networks,omitempty" tf:"networks,omitempty"`
+
+	// Map of the labels which will be assigned to the server
+	// +kubebuilder:validation:Optional
+	ServerLabels map[string]*string `json:"serverLabels,omitempty" tf:"server_labels,omitempty"`
 
 	// Hetzner Cloud datacenter
 	// +kubebuilder:validation:Optional
@@ -665,7 +723,7 @@ type TemplateParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	AuthCertificateAuthoritySecretRef *v1.SecretKeySelector `json:"authCertificateAuthoritySecretRef,omitempty" tf:"-"`
@@ -689,7 +747,7 @@ type TemplateParameters struct {
 	DriverID *string `json:"driverId,omitempty" tf:"driver_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	EngineEnv map[string]string `json:"engineEnv,omitempty" tf:"engine_env,omitempty"`
+	EngineEnv map[string]*string `json:"engineEnv,omitempty" tf:"engine_env,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	EngineInsecureRegistry []*string `json:"engineInsecureRegistry,omitempty" tf:"engine_insecure_registry,omitempty"`
@@ -698,10 +756,10 @@ type TemplateParameters struct {
 	EngineInstallURL *string `json:"engineInstallUrl,omitempty" tf:"engine_install_url,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	EngineLabel map[string]string `json:"engineLabel,omitempty" tf:"engine_label,omitempty"`
+	EngineLabel map[string]*string `json:"engineLabel,omitempty" tf:"engine_label,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	EngineOpt map[string]string `json:"engineOpt,omitempty" tf:"engine_opt,omitempty"`
+	EngineOpt map[string]*string `json:"engineOpt,omitempty" tf:"engine_opt,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	EngineRegistryMirror []*string `json:"engineRegistryMirror,omitempty" tf:"engine_registry_mirror,omitempty"`
@@ -710,11 +768,14 @@ type TemplateParameters struct {
 	EngineStorageDriver *string `json:"engineStorageDriver,omitempty" tf:"engine_storage_driver,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	HarvesterConfig []HarvesterConfigParameters `json:"harvesterConfig,omitempty" tf:"harvester_config,omitempty"`
+
+	// +kubebuilder:validation:Optional
 	HetznerConfig []HetznerConfigParameters `json:"hetznerConfig,omitempty" tf:"hetzner_config,omitempty"`
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	LinodeConfig []LinodeConfigParameters `json:"linodeConfig,omitempty" tf:"linode_config,omitempty"`

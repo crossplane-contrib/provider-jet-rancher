@@ -26,7 +26,9 @@ import (
 )
 
 type NodesObservation struct {
-	Capacity map[string]string `json:"capacity,omitempty" tf:"capacity,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	Capacity map[string]*string `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
@@ -37,6 +39,8 @@ type NodesObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -50,18 +54,12 @@ type NodesObservation struct {
 
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
-	SystemInfo map[string]string `json:"systemInfo,omitempty" tf:"system_info,omitempty"`
+	SSHUser *string `json:"sshUser,omitempty" tf:"ssh_user,omitempty"`
+
+	SystemInfo map[string]*string `json:"systemInfo,omitempty" tf:"system_info,omitempty"`
 }
 
 type NodesParameters struct {
-
-	// Annotations of the resource
-	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
-
-	// Labels of the resource
-	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
 }
 
 type SyncObservation struct {
@@ -86,7 +84,7 @@ type SyncParameters struct {
 
 	// Wait until active status is confirmed a number of times (wait interval of 5s)
 	// +kubebuilder:validation:Optional
-	StateConfirm *int64 `json:"stateConfirm,omitempty" tf:"state_confirm,omitempty"`
+	StateConfirm *float64 `json:"stateConfirm,omitempty" tf:"state_confirm,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Synced *bool `json:"synced,omitempty" tf:"synced,omitempty"`

@@ -68,7 +68,7 @@ type AksConfigParameters struct {
 
 	// GB size to be used to specify the disk for every machine in the agent pool. If you specify 0, it will apply the default according to the "agent vm size" specified
 	// +kubebuilder:validation:Optional
-	AgentOsDiskSize *int64 `json:"agentOsDiskSize,omitempty" tf:"agent_os_disk_size,omitempty"`
+	AgentOsDiskSize *float64 `json:"agentOsDiskSize,omitempty" tf:"agent_os_disk_size,omitempty"`
 
 	// Name for the agent pool, upto 12 alphanumeric characters
 	// +kubebuilder:validation:Optional
@@ -100,7 +100,7 @@ type AksConfigParameters struct {
 
 	// Number of machines (VMs) in the agent pool. Allowed values must be in the range of 1 to 100 (inclusive)
 	// +kubebuilder:validation:Optional
-	Count *int64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// An IP address assigned to the Kubernetes DNS service. It must be within the Kubernetes Service address range specified in "service cidr"
 	// +kubebuilder:validation:Optional
@@ -144,7 +144,7 @@ type AksConfigParameters struct {
 
 	// Maximum number of pods that can run on a node
 	// +kubebuilder:validation:Optional
-	MaxPods *int64 `json:"maxPods,omitempty" tf:"max_pods,omitempty"`
+	MaxPods *float64 `json:"maxPods,omitempty" tf:"max_pods,omitempty"`
 
 	// Network plugin used for building Kubernetes network. Chooses from [azure kubenet]
 	// +kubebuilder:validation:Optional
@@ -180,7 +180,7 @@ type AksConfigParameters struct {
 
 	// Tags for Kubernetes cluster. For example, foo=bar
 	// +kubebuilder:validation:Optional
-	Tag map[string]string `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag map[string]*string `json:"tag,omitempty" tf:"tag,omitempty"`
 
 	// Tags for Kubernetes cluster. For example, `["foo=bar","bar=foo"]`
 	// +kubebuilder:validation:Optional
@@ -310,7 +310,7 @@ type AksConfigV2Parameters struct {
 
 	// The AKS cluster tags
 	// +kubebuilder:validation:Optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The AKS virtual network
 	// +kubebuilder:validation:Optional
@@ -354,7 +354,7 @@ type AuthorizationParameters struct {
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Options map[string]string `json:"options,omitempty" tf:"options,omitempty"`
+	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 }
 
 type AutoscalingObservation struct {
@@ -368,11 +368,11 @@ type AutoscalingParameters struct {
 
 	// The GKE node pool config max node count
 	// +kubebuilder:validation:Optional
-	MaxNodeCount *int64 `json:"maxNodeCount,omitempty" tf:"max_node_count,omitempty"`
+	MaxNodeCount *float64 `json:"maxNodeCount,omitempty" tf:"max_node_count,omitempty"`
 
 	// The GKE node pool config min node count
 	// +kubebuilder:validation:Optional
-	MinNodeCount *int64 `json:"minNodeCount,omitempty" tf:"min_node_count,omitempty"`
+	MinNodeCount *float64 `json:"minNodeCount,omitempty" tf:"min_node_count,omitempty"`
 }
 
 type AwsCloudProviderObservation struct {
@@ -411,25 +411,25 @@ type AzureCloudProviderParameters struct {
 	CloudProviderBackoff *bool `json:"cloudProviderBackoff,omitempty" tf:"cloud_provider_backoff,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	CloudProviderBackoffDuration *int64 `json:"cloudProviderBackoffDuration,omitempty" tf:"cloud_provider_backoff_duration,omitempty"`
+	CloudProviderBackoffDuration *float64 `json:"cloudProviderBackoffDuration,omitempty" tf:"cloud_provider_backoff_duration,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	CloudProviderBackoffExponent *int64 `json:"cloudProviderBackoffExponent,omitempty" tf:"cloud_provider_backoff_exponent,omitempty"`
+	CloudProviderBackoffExponent *float64 `json:"cloudProviderBackoffExponent,omitempty" tf:"cloud_provider_backoff_exponent,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	CloudProviderBackoffJitter *int64 `json:"cloudProviderBackoffJitter,omitempty" tf:"cloud_provider_backoff_jitter,omitempty"`
+	CloudProviderBackoffJitter *float64 `json:"cloudProviderBackoffJitter,omitempty" tf:"cloud_provider_backoff_jitter,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	CloudProviderBackoffRetries *int64 `json:"cloudProviderBackoffRetries,omitempty" tf:"cloud_provider_backoff_retries,omitempty"`
+	CloudProviderBackoffRetries *float64 `json:"cloudProviderBackoffRetries,omitempty" tf:"cloud_provider_backoff_retries,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CloudProviderRateLimit *bool `json:"cloudProviderRateLimit,omitempty" tf:"cloud_provider_rate_limit,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	CloudProviderRateLimitBucket *int64 `json:"cloudProviderRateLimitBucket,omitempty" tf:"cloud_provider_rate_limit_bucket,omitempty"`
+	CloudProviderRateLimitBucket *float64 `json:"cloudProviderRateLimitBucket,omitempty" tf:"cloud_provider_rate_limit_bucket,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	CloudProviderRateLimitQPS *int64 `json:"cloudProviderRateLimitQps,omitempty" tf:"cloud_provider_rate_limit_qps,omitempty"`
+	CloudProviderRateLimitQPS *float64 `json:"cloudProviderRateLimitQps,omitempty" tf:"cloud_provider_rate_limit_qps,omitempty"`
 
 	// Load balancer type (basic | standard). Must be standard for auto-scaling
 	// +kubebuilder:validation:Optional
@@ -439,7 +439,7 @@ type AzureCloudProviderParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	MaximumLoadBalancerRuleCount *int64 `json:"maximumLoadBalancerRuleCount,omitempty" tf:"maximum_load_balancer_rule_count,omitempty"`
+	MaximumLoadBalancerRuleCount *float64 `json:"maximumLoadBalancerRuleCount,omitempty" tf:"maximum_load_balancer_rule_count,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	PrimaryAvailabilitySetName *string `json:"primaryAvailabilitySetName,omitempty" tf:"primary_availability_set_name,omitempty"`
@@ -490,10 +490,10 @@ type BackupConfigParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IntervalHours *int64 `json:"intervalHours,omitempty" tf:"interval_hours,omitempty"`
+	IntervalHours *float64 `json:"intervalHours,omitempty" tf:"interval_hours,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Retention *int64 `json:"retention,omitempty" tf:"retention,omitempty"`
+	Retention *float64 `json:"retention,omitempty" tf:"retention,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	S3BackupConfig []S3BackupConfigParameters `json:"s3BackupConfig,omitempty" tf:"s3_backup_config,omitempty"`
@@ -502,7 +502,7 @@ type BackupConfigParameters struct {
 	SafeTimestamp *bool `json:"safeTimestamp,omitempty" tf:"safe_timestamp,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type BastionHostObservation struct {
@@ -665,7 +665,7 @@ type ClusterMonitoringInputParameters struct {
 
 	// Answers for monitor input
 	// +kubebuilder:validation:Optional
-	Answers map[string]string `json:"answers,omitempty" tf:"answers,omitempty"`
+	Answers map[string]*string `json:"answers,omitempty" tf:"answers,omitempty"`
 
 	// Monitoring version
 	// +kubebuilder:validation:Optional
@@ -700,7 +700,7 @@ type ClusterParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ClusterAuthEndpoint []ClusterAuthEndpointParameters `json:"clusterAuthEndpoint,omitempty" tf:"cluster_auth_endpoint,omitempty"`
@@ -776,7 +776,7 @@ type ClusterParameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	OkeConfig []OkeConfigParameters `json:"okeConfig,omitempty" tf:"oke_config,omitempty"`
@@ -797,6 +797,8 @@ type ClusterParameters struct {
 }
 
 type ClusterRegistrationTokenObservation struct {
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
 	Command *string `json:"command,omitempty" tf:"command,omitempty"`
@@ -809,24 +811,20 @@ type ClusterRegistrationTokenObservation struct {
 
 	InsecureWindowsNodeCommand *string `json:"insecureWindowsNodeCommand,omitempty" tf:"insecure_windows_node_command,omitempty"`
 
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
 	ManifestURL *string `json:"manifestUrl,omitempty" tf:"manifest_url,omitempty"`
 
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	NodeCommand *string `json:"nodeCommand,omitempty" tf:"node_command,omitempty"`
 
+	Token *string `json:"token,omitempty" tf:"token,omitempty"`
+
 	WindowsNodeCommand *string `json:"windowsNodeCommand,omitempty" tf:"windows_node_command,omitempty"`
 }
 
 type ClusterRegistrationTokenParameters struct {
-
-	// Annotations of the resource
-	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
-
-	// Labels of the resource
-	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
 }
 
 type ClusterTemplateAnswersObservation struct {
@@ -844,7 +842,7 @@ type ClusterTemplateAnswersParameters struct {
 
 	// Key/values for answer
 	// +kubebuilder:validation:Optional
-	Values map[string]string `json:"values,omitempty" tf:"values,omitempty"`
+	Values map[string]*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type ClusterTemplateQuestionsObservation struct {
@@ -876,7 +874,7 @@ type ConfigParameters struct {
 
 	// The GKE node config disk size (Gb)
 	// +kubebuilder:validation:Optional
-	DiskSizeGb *int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
+	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
 
 	// The GKE node config disk type
 	// +kubebuilder:validation:Optional
@@ -888,11 +886,11 @@ type ConfigParameters struct {
 
 	// The GKE node config labels
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The GKE node config local ssd count
 	// +kubebuilder:validation:Optional
-	LocalSsdCount *int64 `json:"localSsdCount,omitempty" tf:"local_ssd_count,omitempty"`
+	LocalSsdCount *float64 `json:"localSsdCount,omitempty" tf:"local_ssd_count,omitempty"`
 
 	// The GKE node config machine type
 	// +kubebuilder:validation:Optional
@@ -924,13 +922,13 @@ type ConfigurationParameters struct {
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	MaxAge *int64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	MaxBackup *int64 `json:"maxBackup,omitempty" tf:"max_backup,omitempty"`
+	MaxBackup *float64 `json:"maxBackup,omitempty" tf:"max_backup,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	MaxSize *int64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
@@ -949,14 +947,14 @@ type DNSParameters struct {
 	LinearAutoscalerParams []LinearAutoscalerParamsParameters `json:"linearAutoscalerParams,omitempty" tf:"linear_autoscaler_params,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	NodeSelector map[string]string `json:"nodeSelector,omitempty" tf:"node_selector,omitempty"`
+	NodeSelector map[string]*string `json:"nodeSelector,omitempty" tf:"node_selector,omitempty"`
 
 	// Nodelocal dns
 	// +kubebuilder:validation:Optional
 	Nodelocal []NodelocalParameters `json:"nodelocal,omitempty" tf:"nodelocal,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Options map[string]string `json:"options,omitempty" tf:"options,omitempty"`
+	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
@@ -997,13 +995,13 @@ type DrainInputParameters struct {
 	Force *bool `json:"force,omitempty" tf:"force,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	GracePeriod *int64 `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
+	GracePeriod *float64 `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	IgnoreDaemonSets *bool `json:"ignoreDaemonSets,omitempty" tf:"ignore_daemon_sets,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type EcrCredentialPluginObservation struct {
@@ -1040,7 +1038,7 @@ type EksConfigParameters struct {
 
 	// The desired number of worker nodes
 	// +kubebuilder:validation:Optional
-	DesiredNodes *int64 `json:"desiredNodes,omitempty" tf:"desired_nodes,omitempty"`
+	DesiredNodes *float64 `json:"desiredNodes,omitempty" tf:"desired_nodes,omitempty"`
 
 	// Enables EBS encryption of worker nodes
 	// +kubebuilder:validation:Optional
@@ -1060,15 +1058,15 @@ type EksConfigParameters struct {
 
 	// The maximum number of worker nodes
 	// +kubebuilder:validation:Optional
-	MaximumNodes *int64 `json:"maximumNodes,omitempty" tf:"maximum_nodes,omitempty"`
+	MaximumNodes *float64 `json:"maximumNodes,omitempty" tf:"maximum_nodes,omitempty"`
 
 	// The minimum number of worker nodes
 	// +kubebuilder:validation:Optional
-	MinimumNodes *int64 `json:"minimumNodes,omitempty" tf:"minimum_nodes,omitempty"`
+	MinimumNodes *float64 `json:"minimumNodes,omitempty" tf:"minimum_nodes,omitempty"`
 
 	// The volume size for each node
 	// +kubebuilder:validation:Optional
-	NodeVolumeSize *int64 `json:"nodeVolumeSize,omitempty" tf:"node_volume_size,omitempty"`
+	NodeVolumeSize *float64 `json:"nodeVolumeSize,omitempty" tf:"node_volume_size,omitempty"`
 
 	// The AWS Region to create the EKS cluster in
 	// +kubebuilder:validation:Optional
@@ -1170,7 +1168,7 @@ type EksConfigV2Parameters struct {
 
 	// The EKS cluster tags
 	// +kubebuilder:validation:Optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type EtcdObservation struct {
@@ -1194,7 +1192,7 @@ type EtcdParameters struct {
 	ExternalUrls []*string `json:"externalUrls,omitempty" tf:"external_urls,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ExtraArgs map[string]string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
+	ExtraArgs map[string]*string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ExtraBinds []*string `json:"extraBinds,omitempty" tf:"extra_binds,omitempty"`
@@ -1203,7 +1201,7 @@ type EtcdParameters struct {
 	ExtraEnv []*string `json:"extraEnv,omitempty" tf:"extra_env,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	GID *int64 `json:"gid,omitempty" tf:"gid,omitempty"`
+	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
@@ -1221,7 +1219,7 @@ type EtcdParameters struct {
 	Snapshot *bool `json:"snapshot,omitempty" tf:"snapshot,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	UID *int64 `json:"uid,omitempty" tf:"uid,omitempty"`
+	UID *float64 `json:"uid,omitempty" tf:"uid,omitempty"`
 }
 
 type EventRateLimitObservation struct {
@@ -1264,7 +1262,7 @@ type GkeConfigParameters struct {
 
 	// Size of the disk attached to each node
 	// +kubebuilder:validation:Optional
-	DiskSizeGb *int64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
+	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
 
 	// Type of the disk attached to each node
 	// +kubebuilder:validation:Required
@@ -1368,11 +1366,11 @@ type GkeConfigParameters struct {
 
 	// The map of Kubernetes labels (key/value pairs) to be applied to each node
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The number of local SSD disks to be attached to the node
 	// +kubebuilder:validation:Optional
-	LocalSsdCount *int64 `json:"localSsdCount,omitempty" tf:"local_ssd_count,omitempty"`
+	LocalSsdCount *float64 `json:"localSsdCount,omitempty" tf:"local_ssd_count,omitempty"`
 
 	// Locations to use for the cluster
 	// +kubebuilder:validation:Required
@@ -1400,11 +1398,11 @@ type GkeConfigParameters struct {
 
 	// Maximum number of nodes in the NodePool. Must be >= minNodeCount. There has to enough quota to scale up the cluster
 	// +kubebuilder:validation:Optional
-	MaxNodeCount *int64 `json:"maxNodeCount,omitempty" tf:"max_node_count,omitempty"`
+	MaxNodeCount *float64 `json:"maxNodeCount,omitempty" tf:"max_node_count,omitempty"`
 
 	// Minimmum number of nodes in the NodePool. Must be >= 1 and <= maxNodeCount
 	// +kubebuilder:validation:Optional
-	MinNodeCount *int64 `json:"minNodeCount,omitempty" tf:"min_node_count,omitempty"`
+	MinNodeCount *float64 `json:"minNodeCount,omitempty" tf:"min_node_count,omitempty"`
 
 	// The network to use for the cluster
 	// +kubebuilder:validation:Required
@@ -1412,7 +1410,7 @@ type GkeConfigParameters struct {
 
 	// The number of nodes to create in this cluster
 	// +kubebuilder:validation:Optional
-	NodeCount *int64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
+	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
 	// The ID of the cluster node pool
 	// +kubebuilder:validation:Required
@@ -1440,7 +1438,7 @@ type GkeConfigParameters struct {
 
 	// The map of Kubernetes labels (key/value pairs) to be applied to each cluster
 	// +kubebuilder:validation:Optional
-	ResourceLabels map[string]string `json:"resourceLabels,omitempty" tf:"resource_labels,omitempty"`
+	ResourceLabels map[string]*string `json:"resourceLabels,omitempty" tf:"resource_labels,omitempty"`
 
 	// The Google Cloud Platform Service Account to be used by the node VMs
 	// +kubebuilder:validation:Required
@@ -1478,7 +1476,7 @@ type GkeConfigV2NodePoolsParameters struct {
 
 	// The GKE node pool config initial node count
 	// +kubebuilder:validation:Required
-	InitialNodeCount *int64 `json:"initialNodeCount" tf:"initial_node_count,omitempty"`
+	InitialNodeCount *float64 `json:"initialNodeCount" tf:"initial_node_count,omitempty"`
 
 	// The GKE node pool config management
 	// +kubebuilder:validation:Optional
@@ -1486,7 +1484,7 @@ type GkeConfigV2NodePoolsParameters struct {
 
 	// The GKE node pool config max pods constraint
 	// +kubebuilder:validation:Optional
-	MaxPodsConstraint *int64 `json:"maxPodsConstraint,omitempty" tf:"max_pods_constraint,omitempty"`
+	MaxPodsConstraint *float64 `json:"maxPodsConstraint,omitempty" tf:"max_pods_constraint,omitempty"`
 
 	// The GKE node pool config name
 	// +kubebuilder:validation:Required
@@ -1536,7 +1534,7 @@ type GkeConfigV2Parameters struct {
 
 	// The GKE cluster labels
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The GKE cluster locations
 	// +kubebuilder:validation:Optional
@@ -1681,22 +1679,22 @@ type IngressParameters struct {
 	DefaultBackend *bool `json:"defaultBackend,omitempty" tf:"default_backend,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ExtraArgs map[string]string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
+	ExtraArgs map[string]*string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	HTTPPort *int64 `json:"httpPort,omitempty" tf:"http_port,omitempty"`
+	HTTPPort *float64 `json:"httpPort,omitempty" tf:"http_port,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	HTTPSPort *int64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
+	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	NetworkMode *string `json:"networkMode,omitempty" tf:"network_mode,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	NodeSelector map[string]string `json:"nodeSelector,omitempty" tf:"node_selector,omitempty"`
+	NodeSelector map[string]*string `json:"nodeSelector,omitempty" tf:"node_selector,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Options map[string]string `json:"options,omitempty" tf:"options,omitempty"`
+	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
@@ -1725,7 +1723,7 @@ type IngressTolerationsParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Seconds *int64 `json:"seconds,omitempty" tf:"seconds,omitempty"`
+	Seconds *float64 `json:"seconds,omitempty" tf:"seconds,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
@@ -1765,7 +1763,7 @@ type KubeAPIObservation struct {
 type KubeAPIParameters struct {
 
 	// +kubebuilder:validation:Optional
-	AdmissionConfiguration map[string]string `json:"admissionConfiguration,omitempty" tf:"admission_configuration,omitempty"`
+	AdmissionConfiguration map[string]*string `json:"admissionConfiguration,omitempty" tf:"admission_configuration,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	AlwaysPullImages *bool `json:"alwaysPullImages,omitempty" tf:"always_pull_images,omitempty"`
@@ -1777,7 +1775,7 @@ type KubeAPIParameters struct {
 	EventRateLimit []EventRateLimitParameters `json:"eventRateLimit,omitempty" tf:"event_rate_limit,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ExtraArgs map[string]string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
+	ExtraArgs map[string]*string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ExtraBinds []*string `json:"extraBinds,omitempty" tf:"extra_binds,omitempty"`
@@ -1810,7 +1808,7 @@ type KubeControllerParameters struct {
 	ClusterCidr *string `json:"clusterCidr,omitempty" tf:"cluster_cidr,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ExtraArgs map[string]string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
+	ExtraArgs map[string]*string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ExtraBinds []*string `json:"extraBinds,omitempty" tf:"extra_binds,omitempty"`
@@ -1837,7 +1835,7 @@ type KubeletParameters struct {
 	ClusterDomain *string `json:"clusterDomain,omitempty" tf:"cluster_domain,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ExtraArgs map[string]string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
+	ExtraArgs map[string]*string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ExtraBinds []*string `json:"extraBinds,omitempty" tf:"extra_binds,omitempty"`
@@ -1864,7 +1862,7 @@ type KubeproxyObservation struct {
 type KubeproxyParameters struct {
 
 	// +kubebuilder:validation:Optional
-	ExtraArgs map[string]string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
+	ExtraArgs map[string]*string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ExtraBinds []*string `json:"extraBinds,omitempty" tf:"extra_binds,omitempty"`
@@ -1891,7 +1889,7 @@ type LaunchTemplateParameters struct {
 
 	// The EKS node group launch template version
 	// +kubebuilder:validation:Optional
-	Version *int64 `json:"version,omitempty" tf:"version,omitempty"`
+	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type LinearAutoscalerParamsObservation struct {
@@ -1903,10 +1901,10 @@ type LinearAutoscalerParamsParameters struct {
 	CoresPerReplica *float64 `json:"coresPerReplica,omitempty" tf:"cores_per_replica,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	NodesPerReplica *float64 `json:"nodesPerReplica,omitempty" tf:"nodes_per_replica,omitempty"`
@@ -1942,7 +1940,7 @@ type LoadBalancerParameters struct {
 	MonitorDelay *string `json:"monitorDelay,omitempty" tf:"monitor_delay,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	MonitorMaxRetries *int64 `json:"monitorMaxRetries,omitempty" tf:"monitor_max_retries,omitempty"`
+	MonitorMaxRetries *float64 `json:"monitorMaxRetries,omitempty" tf:"monitor_max_retries,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	MonitorTimeout *string `json:"monitorTimeout,omitempty" tf:"monitor_timeout,omitempty"`
@@ -1988,7 +1986,7 @@ type MetadataObservation struct {
 type MetadataParameters struct {
 
 	// +kubebuilder:validation:Optional
-	RequestTimeout *int64 `json:"requestTimeout,omitempty" tf:"request_timeout,omitempty"`
+	RequestTimeout *float64 `json:"requestTimeout,omitempty" tf:"request_timeout,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	SearchOrder *string `json:"searchOrder,omitempty" tf:"search_order,omitempty"`
@@ -2000,16 +1998,16 @@ type MonitoringObservation struct {
 type MonitoringParameters struct {
 
 	// +kubebuilder:validation:Optional
-	NodeSelector map[string]string `json:"nodeSelector,omitempty" tf:"node_selector,omitempty"`
+	NodeSelector map[string]*string `json:"nodeSelector,omitempty" tf:"node_selector,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Options map[string]string `json:"options,omitempty" tf:"options,omitempty"`
+	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Replicas *int64 `json:"replicas,omitempty" tf:"replicas,omitempty"`
+	Replicas *float64 `json:"replicas,omitempty" tf:"replicas,omitempty"`
 
 	// Monitoring add-on tolerations
 	// +kubebuilder:validation:Optional
@@ -2035,7 +2033,7 @@ type MonitoringTolerationsParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Seconds *int64 `json:"seconds,omitempty" tf:"seconds,omitempty"`
+	Seconds *float64 `json:"seconds,omitempty" tf:"seconds,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
@@ -2062,11 +2060,11 @@ type MonitoringUpdateStrategyRollingUpdateParameters struct {
 
 	// Rolling update max surge
 	// +kubebuilder:validation:Optional
-	MaxSurge *int64 `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
+	MaxSurge *float64 `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
 
 	// Rolling update max unavailable
 	// +kubebuilder:validation:Optional
-	MaxUnavailable *int64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
+	MaxUnavailable *float64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
 }
 
 type NetworkObservation struct {
@@ -2093,7 +2091,7 @@ type NetworkTolerationsParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Seconds *int64 `json:"seconds,omitempty" tf:"seconds,omitempty"`
+	Seconds *float64 `json:"seconds,omitempty" tf:"seconds,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
@@ -2107,11 +2105,11 @@ type NodeGroupsParameters struct {
 
 	// The EKS node group desired size
 	// +kubebuilder:validation:Optional
-	DesiredSize *int64 `json:"desiredSize,omitempty" tf:"desired_size,omitempty"`
+	DesiredSize *float64 `json:"desiredSize,omitempty" tf:"desired_size,omitempty"`
 
 	// The EKS node group disk size
 	// +kubebuilder:validation:Optional
-	DiskSize *int64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
+	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
 	// The EKS node group ssh key
 	// +kubebuilder:validation:Optional
@@ -2131,7 +2129,7 @@ type NodeGroupsParameters struct {
 
 	// The EKS node group tags
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The EKS node groups launch template
 	// +kubebuilder:validation:Optional
@@ -2139,11 +2137,11 @@ type NodeGroupsParameters struct {
 
 	// The EKS node group maximum size
 	// +kubebuilder:validation:Optional
-	MaxSize *int64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
 	// The EKS node group minimum size
 	// +kubebuilder:validation:Optional
-	MinSize *int64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
 	// The EKS node group name
 	// +kubebuilder:validation:Required
@@ -2155,7 +2153,7 @@ type NodeGroupsParameters struct {
 
 	// The EKS node group resource tags
 	// +kubebuilder:validation:Optional
-	ResourceTags map[string]string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
+	ResourceTags map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
 
 	// The EKS node group spot instace types
 	// +kubebuilder:validation:Optional
@@ -2167,7 +2165,7 @@ type NodeGroupsParameters struct {
 
 	// The EKS node group tags
 	// +kubebuilder:validation:Optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The EKS node group user data
 	// +kubebuilder:validation:Optional
@@ -2185,7 +2183,7 @@ type NodePoolsParameters struct {
 
 	// The AKS node pool count
 	// +kubebuilder:validation:Optional
-	Count *int64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// Is AKS node pool auto scaling enabled?
 	// +kubebuilder:validation:Optional
@@ -2193,15 +2191,15 @@ type NodePoolsParameters struct {
 
 	// The AKS node pool max count
 	// +kubebuilder:validation:Optional
-	MaxCount *int64 `json:"maxCount,omitempty" tf:"max_count,omitempty"`
+	MaxCount *float64 `json:"maxCount,omitempty" tf:"max_count,omitempty"`
 
 	// The AKS node pool max pods
 	// +kubebuilder:validation:Optional
-	MaxPods *int64 `json:"maxPods,omitempty" tf:"max_pods,omitempty"`
+	MaxPods *float64 `json:"maxPods,omitempty" tf:"max_pods,omitempty"`
 
 	// The AKS node pool min count
 	// +kubebuilder:validation:Optional
-	MinCount *int64 `json:"minCount,omitempty" tf:"min_count,omitempty"`
+	MinCount *float64 `json:"minCount,omitempty" tf:"min_count,omitempty"`
 
 	// The AKS node pool mode
 	// +kubebuilder:validation:Optional
@@ -2217,7 +2215,7 @@ type NodePoolsParameters struct {
 
 	// The AKS node pool os disk size gb
 	// +kubebuilder:validation:Optional
-	OsDiskSizeGb *int64 `json:"osDiskSizeGb,omitempty" tf:"os_disk_size_gb,omitempty"`
+	OsDiskSizeGb *float64 `json:"osDiskSizeGb,omitempty" tf:"os_disk_size_gb,omitempty"`
 
 	// The AKS node pool os disk type
 	// +kubebuilder:validation:Optional
@@ -2242,7 +2240,7 @@ type NodelocalParameters struct {
 
 	// Node selector key pair
 	// +kubebuilder:validation:Optional
-	NodeSelector map[string]string `json:"nodeSelector,omitempty" tf:"node_selector,omitempty"`
+	NodeSelector map[string]*string `json:"nodeSelector,omitempty" tf:"node_selector,omitempty"`
 }
 
 type NodesObservation struct {
@@ -2263,7 +2261,7 @@ type NodesParameters struct {
 	InternalAddress *string `json:"internalAddress,omitempty" tf:"internal_address,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	NodeID *string `json:"nodeId,omitempty" tf:"node_id,omitempty"`
@@ -2298,7 +2296,7 @@ type OkeConfigParameters struct {
 
 	// An optional custom boot volume size (in GB) for the nodes
 	// +kubebuilder:validation:Optional
-	CustomBootVolumeSize *int64 `json:"customBootVolumeSize,omitempty" tf:"custom_boot_volume_size,omitempty"`
+	CustomBootVolumeSize *float64 `json:"customBootVolumeSize,omitempty" tf:"custom_boot_volume_size,omitempty"`
 
 	// An optional description of this cluster
 	// +kubebuilder:validation:Optional
@@ -2322,7 +2320,7 @@ type OkeConfigParameters struct {
 
 	// Optional number of OCPUs for nodes (requires flexible node_shape)
 	// +kubebuilder:validation:Optional
-	FlexOcpus *int64 `json:"flexOcpus,omitempty" tf:"flex_ocpus,omitempty"`
+	FlexOcpus *float64 `json:"flexOcpus,omitempty" tf:"flex_ocpus,omitempty"`
 
 	// Optional specify the OCID of the KMS Vault master key
 	// +kubebuilder:validation:Optional
@@ -2334,7 +2332,7 @@ type OkeConfigParameters struct {
 
 	// Optional limit on the total number of nodes in the pool
 	// +kubebuilder:validation:Optional
-	LimitNodeCount *int64 `json:"limitNodeCount,omitempty" tf:"limit_node_count,omitempty"`
+	LimitNodeCount *float64 `json:"limitNodeCount,omitempty" tf:"limit_node_count,omitempty"`
 
 	// The name of the first existing subnet to use for Kubernetes services / LB
 	// +kubebuilder:validation:Optional
@@ -2378,11 +2376,11 @@ type OkeConfigParameters struct {
 
 	// Number of node subnets (defaults to creating 1 regional subnet)
 	// +kubebuilder:validation:Optional
-	QuantityOfNodeSubnets *int64 `json:"quantityOfNodeSubnets,omitempty" tf:"quantity_of_node_subnets,omitempty"`
+	QuantityOfNodeSubnets *float64 `json:"quantityOfNodeSubnets,omitempty" tf:"quantity_of_node_subnets,omitempty"`
 
 	// Number of worker nodes in each subnet / availability domain
 	// +kubebuilder:validation:Optional
-	QuantityPerSubnet *int64 `json:"quantityPerSubnet,omitempty" tf:"quantity_per_subnet,omitempty"`
+	QuantityPerSubnet *float64 `json:"quantityPerSubnet,omitempty" tf:"quantity_per_subnet,omitempty"`
 
 	// The availability domain within the region to host the OKE cluster
 	// +kubebuilder:validation:Required
@@ -2547,11 +2545,11 @@ type Rke2ConfigUpgradeStrategyParameters struct {
 
 	// Server concurrency
 	// +kubebuilder:validation:Optional
-	ServerConcurrency *int64 `json:"serverConcurrency,omitempty" tf:"server_concurrency,omitempty"`
+	ServerConcurrency *float64 `json:"serverConcurrency,omitempty" tf:"server_concurrency,omitempty"`
 
 	// Worker concurrency
 	// +kubebuilder:validation:Optional
-	WorkerConcurrency *int64 `json:"workerConcurrency,omitempty" tf:"worker_concurrency,omitempty"`
+	WorkerConcurrency *float64 `json:"workerConcurrency,omitempty" tf:"worker_concurrency,omitempty"`
 }
 
 type RkeConfigNetworkObservation struct {
@@ -2569,10 +2567,10 @@ type RkeConfigNetworkParameters struct {
 	FlannelNetworkProvider []FlannelNetworkProviderParameters `json:"flannelNetworkProvider,omitempty" tf:"flannel_network_provider,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Mtu *int64 `json:"mtu,omitempty" tf:"mtu,omitempty"`
+	Mtu *float64 `json:"mtu,omitempty" tf:"mtu,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Options map[string]string `json:"options,omitempty" tf:"options,omitempty"`
+	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Plugin *string `json:"plugin,omitempty" tf:"plugin,omitempty"`
@@ -2592,7 +2590,7 @@ type RkeConfigParameters struct {
 
 	// Optional duration in seconds of addon job.
 	// +kubebuilder:validation:Optional
-	AddonJobTimeout *int64 `json:"addonJobTimeout,omitempty" tf:"addon_job_timeout,omitempty"`
+	AddonJobTimeout *float64 `json:"addonJobTimeout,omitempty" tf:"addon_job_timeout,omitempty"`
 
 	// Optional addons descripton to deploy on rke cluster.
 	// +kubebuilder:validation:Optional
@@ -2706,11 +2704,11 @@ type RollingUpdateParameters struct {
 
 	// Rolling update max surge
 	// +kubebuilder:validation:Optional
-	MaxSurge *int64 `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
+	MaxSurge *float64 `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
 
 	// Rolling update max unavailable
 	// +kubebuilder:validation:Optional
-	MaxUnavailable *int64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
+	MaxUnavailable *float64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
 }
 
 type RouteObservation struct {
@@ -2770,7 +2768,7 @@ type ScheduleConfigParameters struct {
 
 	// Cluster scan retention
 	// +kubebuilder:validation:Optional
-	Retention *int64 `json:"retention,omitempty" tf:"retention,omitempty"`
+	Retention *float64 `json:"retention,omitempty" tf:"retention,omitempty"`
 }
 
 type ScheduledClusterScanObservation struct {
@@ -2797,7 +2795,7 @@ type SchedulerObservation struct {
 type SchedulerParameters struct {
 
 	// +kubebuilder:validation:Optional
-	ExtraArgs map[string]string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
+	ExtraArgs map[string]*string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ExtraBinds []*string `json:"extraBinds,omitempty" tf:"extra_binds,omitempty"`
@@ -2899,7 +2897,7 @@ type TolerationsParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Seconds *int64 `json:"seconds,omitempty" tf:"seconds,omitempty"`
+	Seconds *float64 `json:"seconds,omitempty" tf:"seconds,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
@@ -2926,7 +2924,7 @@ type UpdateStrategyRollingUpdateParameters struct {
 
 	// Rolling update max unavailable
 	// +kubebuilder:validation:Optional
-	MaxUnavailable *int64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
+	MaxUnavailable *float64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
 }
 
 type UpgradeStrategyObservation struct {
@@ -2944,11 +2942,11 @@ type UpgradeStrategyParameters struct {
 
 	// Server concurrency
 	// +kubebuilder:validation:Optional
-	ServerConcurrency *int64 `json:"serverConcurrency,omitempty" tf:"server_concurrency,omitempty"`
+	ServerConcurrency *float64 `json:"serverConcurrency,omitempty" tf:"server_concurrency,omitempty"`
 
 	// Worker concurrency
 	// +kubebuilder:validation:Optional
-	WorkerConcurrency *int64 `json:"workerConcurrency,omitempty" tf:"worker_concurrency,omitempty"`
+	WorkerConcurrency *float64 `json:"workerConcurrency,omitempty" tf:"worker_concurrency,omitempty"`
 }
 
 type VirtualCenterObservation struct {
@@ -2969,7 +2967,7 @@ type VirtualCenterParameters struct {
 	Port *string `json:"port,omitempty" tf:"port,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	SoapRoundtripCount *int64 `json:"soapRoundtripCount,omitempty" tf:"soap_roundtrip_count,omitempty"`
+	SoapRoundtripCount *float64 `json:"soapRoundtripCount,omitempty" tf:"soap_roundtrip_count,omitempty"`
 
 	// +kubebuilder:validation:Required
 	UserSecretRef v1.SecretKeySelector `json:"userSecretRef" tf:"-"`
@@ -2993,7 +2991,7 @@ type VsphereCloudProviderGlobalParameters struct {
 	Port *string `json:"port,omitempty" tf:"port,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	SoapRoundtripCount *int64 `json:"soapRoundtripCount,omitempty" tf:"soap_roundtrip_count,omitempty"`
+	SoapRoundtripCount *float64 `json:"soapRoundtripCount,omitempty" tf:"soap_roundtrip_count,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	UserSecretRef *v1.SecretKeySelector `json:"userSecretRef,omitempty" tf:"-"`

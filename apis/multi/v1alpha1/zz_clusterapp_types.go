@@ -40,7 +40,7 @@ type AnswersParameters struct {
 
 	// Key/values for answer
 	// +kubebuilder:validation:Optional
-	Values map[string]string `json:"values,omitempty" tf:"values,omitempty"`
+	Values map[string]*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type ClusterAppObservation struct {
@@ -53,7 +53,7 @@ type ClusterAppParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// Multi cluster app answers
 	// +kubebuilder:validation:Optional
@@ -65,7 +65,7 @@ type ClusterAppParameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Multi cluster app members
 	// +kubebuilder:validation:Optional
@@ -73,7 +73,7 @@ type ClusterAppParameters struct {
 
 	// Multi cluster app revision history limit
 	// +kubebuilder:validation:Optional
-	RevisionHistoryLimit *int64 `json:"revisionHistoryLimit,omitempty" tf:"revision_history_limit,omitempty"`
+	RevisionHistoryLimit *float64 `json:"revisionHistoryLimit,omitempty" tf:"revision_history_limit,omitempty"`
 
 	// Multi cluster app revision name
 	// +kubebuilder:validation:Optional
@@ -129,11 +129,11 @@ type RollingUpdateParameters struct {
 
 	// Rolling update batch size
 	// +kubebuilder:validation:Optional
-	BatchSize *int64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
 	// Rolling update interval
 	// +kubebuilder:validation:Optional
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 }
 
 type TargetsObservation struct {

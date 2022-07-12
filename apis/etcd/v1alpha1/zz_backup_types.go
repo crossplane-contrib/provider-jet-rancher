@@ -34,10 +34,10 @@ type BackupConfigParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IntervalHours *int64 `json:"intervalHours,omitempty" tf:"interval_hours,omitempty"`
+	IntervalHours *float64 `json:"intervalHours,omitempty" tf:"interval_hours,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Retention *int64 `json:"retention,omitempty" tf:"retention,omitempty"`
+	Retention *float64 `json:"retention,omitempty" tf:"retention,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	S3BackupConfig []S3BackupConfigParameters `json:"s3BackupConfig,omitempty" tf:"s3_backup_config,omitempty"`
@@ -46,7 +46,7 @@ type BackupConfigParameters struct {
 	SafeTimestamp *bool `json:"safeTimestamp,omitempty" tf:"safe_timestamp,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type BackupObservation struct {
@@ -57,7 +57,7 @@ type BackupParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	BackupConfig []BackupConfigParameters `json:"backupConfig,omitempty" tf:"backup_config,omitempty"`
@@ -70,7 +70,7 @@ type BackupParameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Manual *bool `json:"manual,omitempty" tf:"manual,omitempty"`

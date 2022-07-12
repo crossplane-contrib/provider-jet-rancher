@@ -82,7 +82,7 @@ type CredentialParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	AzureCredentialConfig []AzureCredentialConfigParameters `json:"azureCredentialConfig,omitempty" tf:"azure_credential_config,omitempty"`
@@ -96,9 +96,12 @@ type CredentialParameters struct {
 	// +kubebuilder:validation:Optional
 	GoogleCredentialConfig []GoogleCredentialConfigParameters `json:"googleCredentialConfig,omitempty" tf:"google_credential_config,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	HarvesterCredentialConfig []HarvesterCredentialConfigParameters `json:"harvesterCredentialConfig,omitempty" tf:"harvester_credential_config,omitempty"`
+
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	LinodeCredentialConfig []LinodeCredentialConfigParameters `json:"linodeCredentialConfig,omitempty" tf:"linode_credential_config,omitempty"`
@@ -131,6 +134,24 @@ type GoogleCredentialConfigParameters struct {
 	// Google auth encoded json
 	// +kubebuilder:validation:Required
 	AuthEncodedJSONSecretRef v1.SecretKeySelector `json:"authEncodedJsonSecretRef" tf:"-"`
+}
+
+type HarvesterCredentialConfigObservation struct {
+}
+
+type HarvesterCredentialConfigParameters struct {
+
+	// The cluster id of imported Harvester cluster
+	// +kubebuilder:validation:Optional
+	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+
+	// Harvester cluster type. must be imported or external
+	// +kubebuilder:validation:Required
+	ClusterType *string `json:"clusterType" tf:"cluster_type,omitempty"`
+
+	// Harvester cluster kubeconfig content
+	// +kubebuilder:validation:Required
+	KubeconfigContentSecretRef v1.SecretKeySelector `json:"kubeconfigContentSecretRef" tf:"-"`
 }
 
 type LinodeCredentialConfigObservation struct {

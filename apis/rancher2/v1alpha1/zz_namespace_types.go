@@ -96,7 +96,7 @@ type NamespaceParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ContainerResourceLimit []ContainerResourceLimitParameters `json:"containerResourceLimit,omitempty" tf:"container_resource_limit,omitempty"`
@@ -107,7 +107,7 @@ type NamespaceParameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Project ID where k8s namespace belongs
 	// +kubebuilder:validation:Required

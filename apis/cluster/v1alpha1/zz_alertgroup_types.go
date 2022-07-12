@@ -33,7 +33,7 @@ type AlertGroupParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// Alert group Cluster ID
 	// +kubebuilder:validation:Required
@@ -45,15 +45,15 @@ type AlertGroupParameters struct {
 
 	// Alert group interval seconds
 	// +kubebuilder:validation:Optional
-	GroupIntervalSeconds *int64 `json:"groupIntervalSeconds,omitempty" tf:"group_interval_seconds,omitempty"`
+	GroupIntervalSeconds *float64 `json:"groupIntervalSeconds,omitempty" tf:"group_interval_seconds,omitempty"`
 
 	// Alert group wait seconds
 	// +kubebuilder:validation:Optional
-	GroupWaitSeconds *int64 `json:"groupWaitSeconds,omitempty" tf:"group_wait_seconds,omitempty"`
+	GroupWaitSeconds *float64 `json:"groupWaitSeconds,omitempty" tf:"group_wait_seconds,omitempty"`
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Alert group recipients
 	// +kubebuilder:validation:Optional
@@ -61,7 +61,7 @@ type AlertGroupParameters struct {
 
 	// Alert group repeat interval seconds
 	// +kubebuilder:validation:Optional
-	RepeatIntervalSeconds *int64 `json:"repeatIntervalSeconds,omitempty" tf:"repeat_interval_seconds,omitempty"`
+	RepeatIntervalSeconds *float64 `json:"repeatIntervalSeconds,omitempty" tf:"repeat_interval_seconds,omitempty"`
 }
 
 type RecipientsObservation struct {

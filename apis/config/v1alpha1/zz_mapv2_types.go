@@ -35,7 +35,7 @@ type MapV2Parameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// K8s cluster ID
 	// +kubebuilder:validation:Required
@@ -43,7 +43,7 @@ type MapV2Parameters struct {
 
 	// ConfigMap V2 data map
 	// +kubebuilder:validation:Required
-	Data map[string]string `json:"data" tf:"data,omitempty"`
+	Data map[string]*string `json:"data" tf:"data,omitempty"`
 
 	// If set to true, ensures that data stored in the ConfigMap cannot be updated
 	// +kubebuilder:validation:Optional
@@ -51,7 +51,7 @@ type MapV2Parameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// ConfigMap V2 namespace
 	// +kubebuilder:validation:Optional

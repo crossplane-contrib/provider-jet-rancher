@@ -38,6 +38,8 @@ type AgentEnvVarsParameters struct {
 }
 
 type ClusterRegistrationTokenObservation struct {
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
 	Command *string `json:"command,omitempty" tf:"command,omitempty"`
@@ -50,24 +52,20 @@ type ClusterRegistrationTokenObservation struct {
 
 	InsecureWindowsNodeCommand *string `json:"insecureWindowsNodeCommand,omitempty" tf:"insecure_windows_node_command,omitempty"`
 
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
 	ManifestURL *string `json:"manifestUrl,omitempty" tf:"manifest_url,omitempty"`
 
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	NodeCommand *string `json:"nodeCommand,omitempty" tf:"node_command,omitempty"`
 
+	Token *string `json:"token,omitempty" tf:"token,omitempty"`
+
 	WindowsNodeCommand *string `json:"windowsNodeCommand,omitempty" tf:"windows_node_command,omitempty"`
 }
 
 type ClusterRegistrationTokenParameters struct {
-
-	// Annotations of the resource
-	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
-
-	// Labels of the resource
-	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
 }
 
 type ConfigsObservation struct {
@@ -119,7 +117,7 @@ type ControlPlaneDrainOptionsParameters struct {
 
 	// Drain options grace period
 	// +kubebuilder:validation:Optional
-	GracePeriod *int64 `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
+	GracePeriod *float64 `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
 
 	// Drain options ignore daemon sets
 	// +kubebuilder:validation:Optional
@@ -131,11 +129,39 @@ type ControlPlaneDrainOptionsParameters struct {
 
 	// Drain options skip wait for delete timeout seconds
 	// +kubebuilder:validation:Optional
-	SkipWaitForDeleteTimeoutSeconds *int64 `json:"skipWaitForDeleteTimeoutSeconds,omitempty" tf:"skip_wait_for_delete_timeout_seconds,omitempty"`
+	SkipWaitForDeleteTimeoutSeconds *float64 `json:"skipWaitForDeleteTimeoutSeconds,omitempty" tf:"skip_wait_for_delete_timeout_seconds,omitempty"`
 
 	// Drain options timeout
 	// +kubebuilder:validation:Optional
-	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+}
+
+type EtcdSnapshotCreateObservation struct {
+}
+
+type EtcdSnapshotCreateParameters struct {
+
+	// ETCD generation to initiate a snapshot
+	// +kubebuilder:validation:Required
+	Generation *float64 `json:"generation" tf:"generation,omitempty"`
+}
+
+type EtcdSnapshotRestoreObservation struct {
+}
+
+type EtcdSnapshotRestoreParameters struct {
+
+	// ETCD snapshot desired generation
+	// +kubebuilder:validation:Required
+	Generation *float64 `json:"generation" tf:"generation,omitempty"`
+
+	// ETCD snapshot name to restore
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// ETCD restore RKE config (set to none, all, or kubernetesVersion)
+	// +kubebuilder:validation:Optional
+	RestoreRkeConfig *string `json:"restoreRkeConfig,omitempty" tf:"restore_rke_config,omitempty"`
 }
 
 type LocalAuthEndpointObservation struct {
@@ -178,7 +204,7 @@ type MachineLabelSelectorParameters struct {
 
 	// Label selector match labels
 	// +kubebuilder:validation:Optional
-	MatchLabels map[string]string `json:"matchLabels,omitempty" tf:"match_labels,omitempty"`
+	MatchLabels map[string]*string `json:"matchLabels,omitempty" tf:"match_labels,omitempty"`
 }
 
 type MachinePoolsObservation struct {
@@ -188,7 +214,7 @@ type MachinePoolsParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// Machine pool cloud credential secret name
 	// +kubebuilder:validation:Required
@@ -198,21 +224,37 @@ type MachinePoolsParameters struct {
 	// +kubebuilder:validation:Optional
 	ControlPlaneRole *bool `json:"controlPlaneRole,omitempty" tf:"control_plane_role,omitempty"`
 
+	// Machine pool drain before delete
+	// +kubebuilder:validation:Optional
+	DrainBeforeDelete *bool `json:"drainBeforeDelete,omitempty" tf:"drain_before_delete,omitempty"`
+
 	// Machine pool etcd role
 	// +kubebuilder:validation:Optional
 	EtcdRole *bool `json:"etcdRole,omitempty" tf:"etcd_role,omitempty"`
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Machine config data
 	// +kubebuilder:validation:Required
 	MachineConfig []MachineConfigParameters `json:"machineConfig" tf:"machine_config,omitempty"`
 
+	// max unhealthy nodes for automated replacement to be allowed
+	// +kubebuilder:validation:Optional
+	MaxUnhealthy *string `json:"maxUnhealthy,omitempty" tf:"max_unhealthy,omitempty"`
+
 	// Machine pool name
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
+
+	// seconds to wait for machine pool drain to complete before machine deletion
+	// +kubebuilder:validation:Optional
+	NodeDrainTimeout *float64 `json:"nodeDrainTimeout,omitempty" tf:"node_drain_timeout,omitempty"`
+
+	// seconds a new node has to become active before it is replaced
+	// +kubebuilder:validation:Optional
+	NodeStartupTimeoutSeconds *float64 `json:"nodeStartupTimeoutSeconds,omitempty" tf:"node_startup_timeout_seconds,omitempty"`
 
 	// Machine pool paused
 	// +kubebuilder:validation:Optional
@@ -220,7 +262,7 @@ type MachinePoolsParameters struct {
 
 	// Machine pool quantity
 	// +kubebuilder:validation:Optional
-	Quantity *int64 `json:"quantity,omitempty" tf:"quantity,omitempty"`
+	Quantity *float64 `json:"quantity,omitempty" tf:"quantity,omitempty"`
 
 	// Machine pool rolling update
 	// +kubebuilder:validation:Optional
@@ -229,6 +271,14 @@ type MachinePoolsParameters struct {
 	// Machine pool taints
 	// +kubebuilder:validation:Optional
 	Taints []TaintsParameters `json:"taints,omitempty" tf:"taints,omitempty"`
+
+	// seconds an unhealthy node has to become active before it is replaced
+	// +kubebuilder:validation:Optional
+	UnhealthyNodeTimeoutSeconds *float64 `json:"unhealthyNodeTimeoutSeconds,omitempty" tf:"unhealthy_node_timeout_seconds,omitempty"`
+
+	// range of unhealthy nodes for automated replacement to be allowed
+	// +kubebuilder:validation:Optional
+	UnhealthyRange *string `json:"unhealthyRange,omitempty" tf:"unhealthy_range,omitempty"`
 
 	// Machine pool worker role
 	// +kubebuilder:validation:Optional
@@ -256,7 +306,7 @@ type MachineSelectorConfigParameters struct {
 
 	// Machine selector config
 	// +kubebuilder:validation:Optional
-	Config map[string]string `json:"config,omitempty" tf:"config,omitempty"`
+	Config map[string]*string `json:"config,omitempty" tf:"config,omitempty"`
 
 	// Machine label selector
 	// +kubebuilder:validation:Optional
@@ -296,7 +346,7 @@ type MirrorsParameters struct {
 
 	// Registry mirror rewrites
 	// +kubebuilder:validation:Optional
-	Rewrites map[string]string `json:"rewrites,omitempty" tf:"rewrites,omitempty"`
+	Rewrites map[string]*string `json:"rewrites,omitempty" tf:"rewrites,omitempty"`
 }
 
 type RegistriesObservation struct {
@@ -328,7 +378,7 @@ type RkeConfigEtcdParameters struct {
 
 	// ETCD snapshot retention
 	// +kubebuilder:validation:Optional
-	SnapshotRetention *int64 `json:"snapshotRetention,omitempty" tf:"snapshot_retention,omitempty"`
+	SnapshotRetention *float64 `json:"snapshotRetention,omitempty" tf:"snapshot_retention,omitempty"`
 
 	// ETCD snapshot schedule cron (e.g `"0 */5 * * *"`)
 	// +kubebuilder:validation:Optional
@@ -370,6 +420,20 @@ type RkeConfigUpgradeStrategyParameters struct {
 	// Worker nodes drain options
 	// +kubebuilder:validation:Optional
 	WorkerDrainOptions []WorkerDrainOptionsParameters `json:"workerDrainOptions,omitempty" tf:"worker_drain_options,omitempty"`
+}
+
+type RotateCertificatesObservation struct {
+}
+
+type RotateCertificatesParameters struct {
+
+	// Desired certificate rotation generation.
+	// +kubebuilder:validation:Required
+	Generation *float64 `json:"generation" tf:"generation,omitempty"`
+
+	// Service certificates to rotate with this generation.
+	// +kubebuilder:validation:Optional
+	Services []*string `json:"services,omitempty" tf:"services,omitempty"`
 }
 
 type S3ConfigObservation struct {
@@ -437,7 +501,7 @@ type V2Parameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// Cluster V2 cloud credential secret name
 	// +kubebuilder:validation:Optional
@@ -464,7 +528,7 @@ type V2Parameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Cluster V2 local auth endpoint
 	// +kubebuilder:validation:Optional
@@ -492,6 +556,14 @@ type V2RkeConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Etcd []RkeConfigEtcdParameters `json:"etcd,omitempty" tf:"etcd,omitempty"`
 
+	// Cluster V2 etcd snapshot create
+	// +kubebuilder:validation:Optional
+	EtcdSnapshotCreate []EtcdSnapshotCreateParameters `json:"etcdSnapshotCreate,omitempty" tf:"etcd_snapshot_create,omitempty"`
+
+	// Cluster V2 etcd snapshot restore
+	// +kubebuilder:validation:Optional
+	EtcdSnapshotRestore []EtcdSnapshotRestoreParameters `json:"etcdSnapshotRestore,omitempty" tf:"etcd_snapshot_restore,omitempty"`
+
 	// Cluster V2 local auth endpoint
 	// +kubebuilder:validation:Optional
 	LocalAuthEndpoint []RkeConfigLocalAuthEndpointParameters `json:"localAuthEndpoint,omitempty" tf:"local_auth_endpoint,omitempty"`
@@ -511,6 +583,10 @@ type V2RkeConfigParameters struct {
 	// Cluster V2 registries
 	// +kubebuilder:validation:Optional
 	Registries []RegistriesParameters `json:"registries,omitempty" tf:"registries,omitempty"`
+
+	// Cluster V2 certificate rotation
+	// +kubebuilder:validation:Optional
+	RotateCertificates []RotateCertificatesParameters `json:"rotateCertificates,omitempty" tf:"rotate_certificates,omitempty"`
 
 	// Cluster V2 upgrade strategy
 	// +kubebuilder:validation:Optional
@@ -540,7 +616,7 @@ type WorkerDrainOptionsParameters struct {
 
 	// Drain options grace period
 	// +kubebuilder:validation:Optional
-	GracePeriod *int64 `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
+	GracePeriod *float64 `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
 
 	// Drain options ignore daemon sets
 	// +kubebuilder:validation:Optional
@@ -552,11 +628,11 @@ type WorkerDrainOptionsParameters struct {
 
 	// Drain options skip wait for delete timeout seconds
 	// +kubebuilder:validation:Optional
-	SkipWaitForDeleteTimeoutSeconds *int64 `json:"skipWaitForDeleteTimeoutSeconds,omitempty" tf:"skip_wait_for_delete_timeout_seconds,omitempty"`
+	SkipWaitForDeleteTimeoutSeconds *float64 `json:"skipWaitForDeleteTimeoutSeconds,omitempty" tf:"skip_wait_for_delete_timeout_seconds,omitempty"`
 
 	// Drain options timeout
 	// +kubebuilder:validation:Optional
-	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 // V2Spec defines the desired state of V2

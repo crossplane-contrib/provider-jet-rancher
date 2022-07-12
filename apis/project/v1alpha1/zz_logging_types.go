@@ -106,7 +106,7 @@ type FluentServersParameters struct {
 	UsernameSecretRef *v1.SecretKeySelector `json:"usernameSecretRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type FluentdConfigObservation struct {
@@ -159,7 +159,7 @@ type LoggingParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CustomTargetConfig []CustomTargetConfigParameters `json:"customTargetConfig,omitempty" tf:"custom_target_config,omitempty"`
@@ -182,16 +182,16 @@ type LoggingParameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	OutputFlushInterval *int64 `json:"outputFlushInterval,omitempty" tf:"output_flush_interval,omitempty"`
+	OutputFlushInterval *float64 `json:"outputFlushInterval,omitempty" tf:"output_flush_interval,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	OutputTags map[string]string `json:"outputTags,omitempty" tf:"output_tags,omitempty"`
+	OutputTags map[string]*string `json:"outputTags,omitempty" tf:"output_tags,omitempty"`
 
 	// +kubebuilder:validation:Required
 	ProjectID *string `json:"projectId" tf:"project_id,omitempty"`

@@ -49,7 +49,7 @@ type BootstrapParameters struct {
 	Telemetry *bool `json:"telemetry,omitempty" tf:"telemetry,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	TokenTTL *int64 `json:"tokenTtl,omitempty" tf:"token_ttl,omitempty"`
+	TokenTTL *float64 `json:"tokenTtl,omitempty" tf:"token_ttl,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	TokenUpdate *bool `json:"tokenUpdate,omitempty" tf:"token_update,omitempty"`

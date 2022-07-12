@@ -39,7 +39,7 @@ type ClassV2Parameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// K8s cluster ID
 	// +kubebuilder:validation:Required
@@ -51,7 +51,7 @@ type ClassV2Parameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// StorageClass mount options
 	// +kubebuilder:validation:Optional
@@ -59,7 +59,7 @@ type ClassV2Parameters struct {
 
 	// StorageClass provisioner paramaters
 	// +kubebuilder:validation:Optional
-	Parameters map[string]string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// StorageClass provisioner reclaim policy
 	// +kubebuilder:validation:Optional
