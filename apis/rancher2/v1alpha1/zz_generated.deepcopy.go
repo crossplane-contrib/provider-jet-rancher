@@ -4407,7 +4407,11 @@ func (in *GkeConfigV2Parameters) DeepCopyInto(out *GkeConfigV2Parameters) {
 		*out = new(bool)
 		**out = **in
 	}
-	out.GoogleCredentialSecretSecretRef = in.GoogleCredentialSecretSecretRef
+	if in.GoogleCredentialSecret != nil {
+		in, out := &in.GoogleCredentialSecret, &out.GoogleCredentialSecret
+		*out = new(string)
+		**out = **in
+	}
 	if in.IPAllocationPolicy != nil {
 		in, out := &in.IPAllocationPolicy, &out.IPAllocationPolicy
 		*out = make([]IPAllocationPolicyParameters, len(*in))

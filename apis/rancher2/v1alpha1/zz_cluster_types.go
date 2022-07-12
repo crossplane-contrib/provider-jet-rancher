@@ -1516,9 +1516,9 @@ type GkeConfigV2Parameters struct {
 	// +kubebuilder:validation:Optional
 	EnableKubernetesAlpha *bool `json:"enableKubernetesAlpha,omitempty" tf:"enable_kubernetes_alpha,omitempty"`
 
-	// Google credential secret
+	// The GKE Cloud Credential ID to use
 	// +kubebuilder:validation:Required
-	GoogleCredentialSecretSecretRef v1.SecretKeySelector `json:"googleCredentialSecretSecretRef" tf:"-"`
+	GoogleCredentialSecret *string `json:"googleCredentialSecret" tf:"google_credential_secret,omitempty"`
 
 	// The GKE ip allocation policy
 	// +kubebuilder:validation:Optional
