@@ -1,8 +1,8 @@
 # Terrajet Rancher Provider
 
 `provider-jet-rancher` is a [Crossplane](https://crossplane.io/) provider that
-is built using [Terrajet](https://github.com/crossplane-contrib/terrajet) code
-generation tools and exposes XRM-conformant managed resources for the 
+is built using [Terrajet](https://github.com/crossplane/terrajet) code
+generation tools and exposes XRM-conformant managed resources for the
 Rancher API.
 
 ## Getting Started
@@ -13,13 +13,26 @@ to the [latest release](https://github.com/crossplane-contrib/provider-jet-ranch
 kubectl crossplane install provider crossplane/provider-jet-rancher:v0.1.0
 ```
 
+Alternatively, you can use declarative installation:
+```
+kubectl apply -f examples/install.yaml
+```
+
+Notice that in this example Provider resource is referencing ControllerConfig with debug enabled.
+
 You can see the API reference [here](https://doc.crds.dev/github.com/crossplane-contrib/provider-jet-rancher).
 
 ## Developing
 
-Run code-generation pipeline:
+Clone this repository and cd into the repository directory. Fetch the upbound/build submodule by running the following:
+
 ```console
-go run cmd/generator/main.go
+make submodules
+```
+
+Run code-generation pipeline:
+```
+make generate
 ```
 
 Run against a Kubernetes cluster:
@@ -32,18 +45,6 @@ Build, push, and install:
 
 ```console
 make all
-```
-
-Build image:
-
-```console
-make image
-```
-
-Push image:
-
-```console
-make push
 ```
 
 Build binary:

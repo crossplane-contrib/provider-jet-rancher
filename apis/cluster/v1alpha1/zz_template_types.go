@@ -58,7 +58,7 @@ type AuthorizationParameters struct {
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Options map[string]string `json:"options,omitempty" tf:"options,omitempty"`
+	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 }
 
 type AwsCloudProviderObservation struct {
@@ -97,25 +97,25 @@ type AzureCloudProviderParameters struct {
 	CloudProviderBackoff *bool `json:"cloudProviderBackoff,omitempty" tf:"cloud_provider_backoff,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	CloudProviderBackoffDuration *int64 `json:"cloudProviderBackoffDuration,omitempty" tf:"cloud_provider_backoff_duration,omitempty"`
+	CloudProviderBackoffDuration *float64 `json:"cloudProviderBackoffDuration,omitempty" tf:"cloud_provider_backoff_duration,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	CloudProviderBackoffExponent *int64 `json:"cloudProviderBackoffExponent,omitempty" tf:"cloud_provider_backoff_exponent,omitempty"`
+	CloudProviderBackoffExponent *float64 `json:"cloudProviderBackoffExponent,omitempty" tf:"cloud_provider_backoff_exponent,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	CloudProviderBackoffJitter *int64 `json:"cloudProviderBackoffJitter,omitempty" tf:"cloud_provider_backoff_jitter,omitempty"`
+	CloudProviderBackoffJitter *float64 `json:"cloudProviderBackoffJitter,omitempty" tf:"cloud_provider_backoff_jitter,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	CloudProviderBackoffRetries *int64 `json:"cloudProviderBackoffRetries,omitempty" tf:"cloud_provider_backoff_retries,omitempty"`
+	CloudProviderBackoffRetries *float64 `json:"cloudProviderBackoffRetries,omitempty" tf:"cloud_provider_backoff_retries,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CloudProviderRateLimit *bool `json:"cloudProviderRateLimit,omitempty" tf:"cloud_provider_rate_limit,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	CloudProviderRateLimitBucket *int64 `json:"cloudProviderRateLimitBucket,omitempty" tf:"cloud_provider_rate_limit_bucket,omitempty"`
+	CloudProviderRateLimitBucket *float64 `json:"cloudProviderRateLimitBucket,omitempty" tf:"cloud_provider_rate_limit_bucket,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	CloudProviderRateLimitQPS *int64 `json:"cloudProviderRateLimitQps,omitempty" tf:"cloud_provider_rate_limit_qps,omitempty"`
+	CloudProviderRateLimitQPS *float64 `json:"cloudProviderRateLimitQps,omitempty" tf:"cloud_provider_rate_limit_qps,omitempty"`
 
 	// Load balancer type (basic | standard). Must be standard for auto-scaling
 	// +kubebuilder:validation:Optional
@@ -125,7 +125,7 @@ type AzureCloudProviderParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	MaximumLoadBalancerRuleCount *int64 `json:"maximumLoadBalancerRuleCount,omitempty" tf:"maximum_load_balancer_rule_count,omitempty"`
+	MaximumLoadBalancerRuleCount *float64 `json:"maximumLoadBalancerRuleCount,omitempty" tf:"maximum_load_balancer_rule_count,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	PrimaryAvailabilitySetName *string `json:"primaryAvailabilitySetName,omitempty" tf:"primary_availability_set_name,omitempty"`
@@ -176,10 +176,10 @@ type BackupConfigParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IntervalHours *int64 `json:"intervalHours,omitempty" tf:"interval_hours,omitempty"`
+	IntervalHours *float64 `json:"intervalHours,omitempty" tf:"interval_hours,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Retention *int64 `json:"retention,omitempty" tf:"retention,omitempty"`
+	Retention *float64 `json:"retention,omitempty" tf:"retention,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	S3BackupConfig []S3BackupConfigParameters `json:"s3BackupConfig,omitempty" tf:"s3_backup_config,omitempty"`
@@ -188,7 +188,7 @@ type BackupConfigParameters struct {
 	SafeTimestamp *bool `json:"safeTimestamp,omitempty" tf:"safe_timestamp,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type BastionHostObservation struct {
@@ -375,13 +375,13 @@ type ConfigurationParameters struct {
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	MaxAge *int64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	MaxBackup *int64 `json:"maxBackup,omitempty" tf:"max_backup,omitempty"`
+	MaxBackup *float64 `json:"maxBackup,omitempty" tf:"max_backup,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	MaxSize *int64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
@@ -400,14 +400,14 @@ type DNSParameters struct {
 	LinearAutoscalerParams []LinearAutoscalerParamsParameters `json:"linearAutoscalerParams,omitempty" tf:"linear_autoscaler_params,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	NodeSelector map[string]string `json:"nodeSelector,omitempty" tf:"node_selector,omitempty"`
+	NodeSelector map[string]*string `json:"nodeSelector,omitempty" tf:"node_selector,omitempty"`
 
 	// Nodelocal dns
 	// +kubebuilder:validation:Optional
 	Nodelocal []NodelocalParameters `json:"nodelocal,omitempty" tf:"nodelocal,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Options map[string]string `json:"options,omitempty" tf:"options,omitempty"`
+	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
@@ -448,13 +448,13 @@ type DrainInputParameters struct {
 	Force *bool `json:"force,omitempty" tf:"force,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	GracePeriod *int64 `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
+	GracePeriod *float64 `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	IgnoreDaemonSets *bool `json:"ignoreDaemonSets,omitempty" tf:"ignore_daemon_sets,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type EcrCredentialPluginObservation struct {
@@ -493,7 +493,7 @@ type EtcdParameters struct {
 	ExternalUrls []*string `json:"externalUrls,omitempty" tf:"external_urls,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ExtraArgs map[string]string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
+	ExtraArgs map[string]*string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ExtraBinds []*string `json:"extraBinds,omitempty" tf:"extra_binds,omitempty"`
@@ -502,7 +502,7 @@ type EtcdParameters struct {
 	ExtraEnv []*string `json:"extraEnv,omitempty" tf:"extra_env,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	GID *int64 `json:"gid,omitempty" tf:"gid,omitempty"`
+	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
@@ -520,7 +520,7 @@ type EtcdParameters struct {
 	Snapshot *bool `json:"snapshot,omitempty" tf:"snapshot,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	UID *int64 `json:"uid,omitempty" tf:"uid,omitempty"`
+	UID *float64 `json:"uid,omitempty" tf:"uid,omitempty"`
 }
 
 type EventRateLimitObservation struct {
@@ -592,22 +592,22 @@ type IngressParameters struct {
 	DefaultBackend *bool `json:"defaultBackend,omitempty" tf:"default_backend,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ExtraArgs map[string]string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
+	ExtraArgs map[string]*string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	HTTPPort *int64 `json:"httpPort,omitempty" tf:"http_port,omitempty"`
+	HTTPPort *float64 `json:"httpPort,omitempty" tf:"http_port,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	HTTPSPort *int64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
+	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	NetworkMode *string `json:"networkMode,omitempty" tf:"network_mode,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	NodeSelector map[string]string `json:"nodeSelector,omitempty" tf:"node_selector,omitempty"`
+	NodeSelector map[string]*string `json:"nodeSelector,omitempty" tf:"node_selector,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Options map[string]string `json:"options,omitempty" tf:"options,omitempty"`
+	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
@@ -636,7 +636,7 @@ type IngressTolerationsParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Seconds *int64 `json:"seconds,omitempty" tf:"seconds,omitempty"`
+	Seconds *float64 `json:"seconds,omitempty" tf:"seconds,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
@@ -662,7 +662,7 @@ type KubeAPIObservation struct {
 type KubeAPIParameters struct {
 
 	// +kubebuilder:validation:Optional
-	AdmissionConfiguration map[string]string `json:"admissionConfiguration,omitempty" tf:"admission_configuration,omitempty"`
+	AdmissionConfiguration map[string]*string `json:"admissionConfiguration,omitempty" tf:"admission_configuration,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	AlwaysPullImages *bool `json:"alwaysPullImages,omitempty" tf:"always_pull_images,omitempty"`
@@ -674,7 +674,7 @@ type KubeAPIParameters struct {
 	EventRateLimit []EventRateLimitParameters `json:"eventRateLimit,omitempty" tf:"event_rate_limit,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ExtraArgs map[string]string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
+	ExtraArgs map[string]*string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ExtraBinds []*string `json:"extraBinds,omitempty" tf:"extra_binds,omitempty"`
@@ -707,7 +707,7 @@ type KubeControllerParameters struct {
 	ClusterCidr *string `json:"clusterCidr,omitempty" tf:"cluster_cidr,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ExtraArgs map[string]string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
+	ExtraArgs map[string]*string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ExtraBinds []*string `json:"extraBinds,omitempty" tf:"extra_binds,omitempty"`
@@ -734,7 +734,7 @@ type KubeletParameters struct {
 	ClusterDomain *string `json:"clusterDomain,omitempty" tf:"cluster_domain,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ExtraArgs map[string]string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
+	ExtraArgs map[string]*string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ExtraBinds []*string `json:"extraBinds,omitempty" tf:"extra_binds,omitempty"`
@@ -761,7 +761,7 @@ type KubeproxyObservation struct {
 type KubeproxyParameters struct {
 
 	// +kubebuilder:validation:Optional
-	ExtraArgs map[string]string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
+	ExtraArgs map[string]*string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ExtraBinds []*string `json:"extraBinds,omitempty" tf:"extra_binds,omitempty"`
@@ -782,10 +782,10 @@ type LinearAutoscalerParamsParameters struct {
 	CoresPerReplica *float64 `json:"coresPerReplica,omitempty" tf:"cores_per_replica,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	NodesPerReplica *float64 `json:"nodesPerReplica,omitempty" tf:"nodes_per_replica,omitempty"`
@@ -821,7 +821,7 @@ type LoadBalancerParameters struct {
 	MonitorDelay *string `json:"monitorDelay,omitempty" tf:"monitor_delay,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	MonitorMaxRetries *int64 `json:"monitorMaxRetries,omitempty" tf:"monitor_max_retries,omitempty"`
+	MonitorMaxRetries *float64 `json:"monitorMaxRetries,omitempty" tf:"monitor_max_retries,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	MonitorTimeout *string `json:"monitorTimeout,omitempty" tf:"monitor_timeout,omitempty"`
@@ -857,7 +857,7 @@ type MetadataObservation struct {
 type MetadataParameters struct {
 
 	// +kubebuilder:validation:Optional
-	RequestTimeout *int64 `json:"requestTimeout,omitempty" tf:"request_timeout,omitempty"`
+	RequestTimeout *float64 `json:"requestTimeout,omitempty" tf:"request_timeout,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	SearchOrder *string `json:"searchOrder,omitempty" tf:"search_order,omitempty"`
@@ -869,16 +869,16 @@ type MonitoringObservation struct {
 type MonitoringParameters struct {
 
 	// +kubebuilder:validation:Optional
-	NodeSelector map[string]string `json:"nodeSelector,omitempty" tf:"node_selector,omitempty"`
+	NodeSelector map[string]*string `json:"nodeSelector,omitempty" tf:"node_selector,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Options map[string]string `json:"options,omitempty" tf:"options,omitempty"`
+	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Replicas *int64 `json:"replicas,omitempty" tf:"replicas,omitempty"`
+	Replicas *float64 `json:"replicas,omitempty" tf:"replicas,omitempty"`
 
 	// Monitoring add-on tolerations
 	// +kubebuilder:validation:Optional
@@ -904,7 +904,7 @@ type MonitoringTolerationsParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Seconds *int64 `json:"seconds,omitempty" tf:"seconds,omitempty"`
+	Seconds *float64 `json:"seconds,omitempty" tf:"seconds,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
@@ -931,11 +931,11 @@ type MonitoringUpdateStrategyRollingUpdateParameters struct {
 
 	// Rolling update max surge
 	// +kubebuilder:validation:Optional
-	MaxSurge *int64 `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
+	MaxSurge *float64 `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
 
 	// Rolling update max unavailable
 	// +kubebuilder:validation:Optional
-	MaxUnavailable *int64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
+	MaxUnavailable *float64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
 }
 
 type NetworkObservation struct {
@@ -962,7 +962,7 @@ type NetworkTolerationsParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Seconds *int64 `json:"seconds,omitempty" tf:"seconds,omitempty"`
+	Seconds *float64 `json:"seconds,omitempty" tf:"seconds,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
@@ -978,7 +978,7 @@ type NodelocalParameters struct {
 
 	// Node selector key pair
 	// +kubebuilder:validation:Optional
-	NodeSelector map[string]string `json:"nodeSelector,omitempty" tf:"node_selector,omitempty"`
+	NodeSelector map[string]*string `json:"nodeSelector,omitempty" tf:"node_selector,omitempty"`
 }
 
 type OpenstackCloudProviderGlobalObservation struct {
@@ -1097,10 +1097,10 @@ type RkeConfigNetworkParameters struct {
 	FlannelNetworkProvider []FlannelNetworkProviderParameters `json:"flannelNetworkProvider,omitempty" tf:"flannel_network_provider,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Mtu *int64 `json:"mtu,omitempty" tf:"mtu,omitempty"`
+	Mtu *float64 `json:"mtu,omitempty" tf:"mtu,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Options map[string]string `json:"options,omitempty" tf:"options,omitempty"`
+	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Plugin *string `json:"plugin,omitempty" tf:"plugin,omitempty"`
@@ -1131,7 +1131,7 @@ type RkeConfigNodesParameters struct {
 	InternalAddress *string `json:"internalAddress,omitempty" tf:"internal_address,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	NodeID *string `json:"nodeId,omitempty" tf:"node_id,omitempty"`
@@ -1162,7 +1162,7 @@ type RkeConfigParameters struct {
 
 	// Optional duration in seconds of addon job.
 	// +kubebuilder:validation:Optional
-	AddonJobTimeout *int64 `json:"addonJobTimeout,omitempty" tf:"addon_job_timeout,omitempty"`
+	AddonJobTimeout *float64 `json:"addonJobTimeout,omitempty" tf:"addon_job_timeout,omitempty"`
 
 	// Optional addons descripton to deploy on rke cluster.
 	// +kubebuilder:validation:Optional
@@ -1258,11 +1258,11 @@ type RollingUpdateParameters struct {
 
 	// Rolling update max surge
 	// +kubebuilder:validation:Optional
-	MaxSurge *int64 `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
+	MaxSurge *float64 `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
 
 	// Rolling update max unavailable
 	// +kubebuilder:validation:Optional
-	MaxUnavailable *int64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
+	MaxUnavailable *float64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
 }
 
 type RouteObservation struct {
@@ -1322,7 +1322,7 @@ type ScheduleConfigParameters struct {
 
 	// Cluster scan retention
 	// +kubebuilder:validation:Optional
-	Retention *int64 `json:"retention,omitempty" tf:"retention,omitempty"`
+	Retention *float64 `json:"retention,omitempty" tf:"retention,omitempty"`
 }
 
 type ScheduledClusterScanObservation struct {
@@ -1349,7 +1349,7 @@ type SchedulerObservation struct {
 type SchedulerParameters struct {
 
 	// +kubebuilder:validation:Optional
-	ExtraArgs map[string]string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
+	ExtraArgs map[string]*string `json:"extraArgs,omitempty" tf:"extra_args,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ExtraBinds []*string `json:"extraBinds,omitempty" tf:"extra_binds,omitempty"`
@@ -1431,7 +1431,7 @@ type TemplateParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// Cluster template description
 	// +kubebuilder:validation:Optional
@@ -1439,7 +1439,7 @@ type TemplateParameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Cluster template members
 	// +kubebuilder:validation:Optional
@@ -1460,7 +1460,7 @@ type TemplateRevisionsParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// Cluster configuration
 	// +kubebuilder:validation:Required
@@ -1476,7 +1476,7 @@ type TemplateRevisionsParameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Cluster template revision name
 	// +kubebuilder:validation:Required
@@ -1502,7 +1502,7 @@ type TolerationsParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Seconds *int64 `json:"seconds,omitempty" tf:"seconds,omitempty"`
+	Seconds *float64 `json:"seconds,omitempty" tf:"seconds,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
@@ -1529,7 +1529,7 @@ type UpdateStrategyRollingUpdateParameters struct {
 
 	// Rolling update max unavailable
 	// +kubebuilder:validation:Optional
-	MaxUnavailable *int64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
+	MaxUnavailable *float64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
 }
 
 type UpgradeStrategyObservation struct {
@@ -1568,7 +1568,7 @@ type VirtualCenterParameters struct {
 	Port *string `json:"port,omitempty" tf:"port,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	SoapRoundtripCount *int64 `json:"soapRoundtripCount,omitempty" tf:"soap_roundtrip_count,omitempty"`
+	SoapRoundtripCount *float64 `json:"soapRoundtripCount,omitempty" tf:"soap_roundtrip_count,omitempty"`
 
 	// +kubebuilder:validation:Required
 	UserSecretRef v1.SecretKeySelector `json:"userSecretRef" tf:"-"`
@@ -1592,7 +1592,7 @@ type VsphereCloudProviderGlobalParameters struct {
 	Port *string `json:"port,omitempty" tf:"port,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	SoapRoundtripCount *int64 `json:"soapRoundtripCount,omitempty" tf:"soap_roundtrip_count,omitempty"`
+	SoapRoundtripCount *float64 `json:"soapRoundtripCount,omitempty" tf:"soap_roundtrip_count,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	UserSecretRef *v1.SecretKeySelector `json:"userSecretRef,omitempty" tf:"-"`

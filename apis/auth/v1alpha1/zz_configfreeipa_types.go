@@ -41,13 +41,13 @@ type ConfigFreeipaParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	ConnectionTimeout *int64 `json:"connectionTimeout,omitempty" tf:"connection_timeout,omitempty"`
+	ConnectionTimeout *float64 `json:"connectionTimeout,omitempty" tf:"connection_timeout,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -75,13 +75,13 @@ type ConfigFreeipaParameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	NestedGroupMembershipEnabled *bool `json:"nestedGroupMembershipEnabled,omitempty" tf:"nested_group_membership_enabled,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Servers []*string `json:"servers" tf:"servers,omitempty"`
@@ -102,7 +102,7 @@ type ConfigFreeipaParameters struct {
 	TestUsername *string `json:"testUsername" tf:"test_username,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	UserDisabledBitMask *int64 `json:"userDisabledBitMask,omitempty" tf:"user_disabled_bit_mask,omitempty"`
+	UserDisabledBitMask *float64 `json:"userDisabledBitMask,omitempty" tf:"user_disabled_bit_mask,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	UserEnabledAttribute *string `json:"userEnabledAttribute,omitempty" tf:"user_enabled_attribute,omitempty"`

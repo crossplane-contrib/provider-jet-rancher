@@ -140,7 +140,7 @@ type ProjectMonitoringInputParameters struct {
 
 	// Answers for monitor input
 	// +kubebuilder:validation:Optional
-	Answers map[string]string `json:"answers,omitempty" tf:"answers,omitempty"`
+	Answers map[string]*string `json:"answers,omitempty" tf:"answers,omitempty"`
 
 	// Monitoring version
 	// +kubebuilder:validation:Optional
@@ -155,7 +155,7 @@ type ProjectParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// +kubebuilder:validation:Required
 	ClusterID *string `json:"clusterId" tf:"cluster_id,omitempty"`
@@ -172,7 +172,7 @@ type ProjectParameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	PodSecurityPolicyTemplateID *string `json:"podSecurityPolicyTemplateId,omitempty" tf:"pod_security_policy_template_id,omitempty"`

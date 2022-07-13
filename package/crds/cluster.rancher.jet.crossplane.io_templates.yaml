@@ -1,8 +1,9 @@
+---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.6.2
+    controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
   name: templates.cluster.rancher.jet.crossplane.io
 spec:
@@ -147,8 +148,7 @@ spec:
                                     addonJobTimeout:
                                       description: Optional duration in seconds of
                                         addon job.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     addons:
                                       description: Optional addons descripton to deploy
                                         on rke cluster.
@@ -343,25 +343,19 @@ spec:
                                                 cloudProviderBackoff:
                                                   type: boolean
                                                 cloudProviderBackoffDuration:
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                                 cloudProviderBackoffExponent:
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                                 cloudProviderBackoffJitter:
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                                 cloudProviderBackoffRetries:
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                                 cloudProviderRateLimit:
                                                   type: boolean
                                                 cloudProviderRateLimitBucket:
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                                 cloudProviderRateLimitQps:
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                                 loadBalancerSku:
                                                   description: Load balancer type
                                                     (basic | standard). Must be standard
@@ -370,8 +364,7 @@ spec:
                                                 location:
                                                   type: string
                                                 maximumLoadBalancerRuleCount:
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                                 primaryAvailabilitySetName:
                                                   type: string
                                                 primaryScaleSetName:
@@ -606,8 +599,7 @@ spec:
                                                       monitorDelay:
                                                         type: string
                                                       monitorMaxRetries:
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                       monitorTimeout:
                                                         type: string
                                                       subnetId:
@@ -620,8 +612,7 @@ spec:
                                                   items:
                                                     properties:
                                                       requestTimeout:
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                       searchOrder:
                                                         type: string
                                                     type: object
@@ -679,8 +670,7 @@ spec:
                                                       port:
                                                         type: string
                                                       soapRoundtripCount:
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                       userSecretRef:
                                                         description: A SecretKeySelector
                                                           is a reference to a secret
@@ -744,8 +734,7 @@ spec:
                                                       port:
                                                         type: string
                                                       soapRoundtripCount:
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                       userSecretRef:
                                                         description: A SecretKeySelector
                                                           is a reference to a secret
@@ -811,11 +800,9 @@ spec:
                                                 coresPerReplica:
                                                   type: number
                                                 max:
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                                 min:
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                                 nodesPerReplica:
                                                   type: number
                                                 preventSinglePointFailure:
@@ -860,8 +847,7 @@ spec:
                                                 operator:
                                                   type: string
                                                 seconds:
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                                 value:
                                                   type: string
                                               required:
@@ -880,13 +866,11 @@ spec:
                                                       maxSurge:
                                                         description: Rolling update
                                                           max surge
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                       maxUnavailable:
                                                         description: Rolling update
                                                           max unavailable
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                     type: object
                                                   type: array
                                                 strategy:
@@ -920,11 +904,9 @@ spec:
                                               type: string
                                             type: object
                                           httpPort:
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           httpsPort:
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           networkMode:
                                             type: string
                                           nodeSelector:
@@ -948,8 +930,7 @@ spec:
                                                 operator:
                                                   type: string
                                                 seconds:
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                                 value:
                                                   type: string
                                               required:
@@ -968,8 +949,7 @@ spec:
                                                       maxUnavailable:
                                                         description: Rolling update
                                                           max unavailable
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                     type: object
                                                   type: array
                                                 strategy:
@@ -998,8 +978,7 @@ spec:
                                           provider:
                                             type: string
                                           replicas:
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           tolerations:
                                             description: Monitoring add-on tolerations
                                             items:
@@ -1011,8 +990,7 @@ spec:
                                                 operator:
                                                   type: string
                                                 seconds:
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                                 value:
                                                   type: string
                                               required:
@@ -1031,13 +1009,11 @@ spec:
                                                       maxSurge:
                                                         description: Rolling update
                                                           max surge
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                       maxUnavailable:
                                                         description: Rolling update
                                                           max unavailable
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                     type: object
                                                   type: array
                                                 strategy:
@@ -1073,8 +1049,7 @@ spec:
                                               type: object
                                             type: array
                                           mtu:
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           options:
                                             additionalProperties:
                                               type: string
@@ -1092,8 +1067,7 @@ spec:
                                                 operator:
                                                   type: string
                                                 seconds:
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                                 value:
                                                   type: string
                                               required:
@@ -1299,11 +1273,9 @@ spec:
                                                       enabled:
                                                         type: boolean
                                                       intervalHours:
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                       retention:
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                       s3BackupConfig:
                                                         items:
                                                           properties:
@@ -1371,8 +1343,7 @@ spec:
                                                       safeTimestamp:
                                                         type: boolean
                                                       timeout:
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                     type: object
                                                   type: array
                                                 caCert:
@@ -1416,8 +1387,7 @@ spec:
                                                     type: string
                                                   type: array
                                                 gid:
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                                 image:
                                                   type: string
                                                 keySecretRef:
@@ -1447,8 +1417,7 @@ spec:
                                                 snapshot:
                                                   type: boolean
                                                 uid:
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                           kubeApi:
@@ -1469,14 +1438,11 @@ spec:
                                                             format:
                                                               type: string
                                                             maxAge:
-                                                              format: int64
-                                                              type: integer
+                                                              type: number
                                                             maxBackup:
-                                                              format: int64
-                                                              type: integer
+                                                              type: number
                                                             maxSize:
-                                                              format: int64
-                                                              type: integer
+                                                              type: number
                                                             path:
                                                               type: string
                                                             policy:
@@ -1644,13 +1610,11 @@ spec:
                                                 force:
                                                   type: boolean
                                                 gracePeriod:
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                                 ignoreDaemonSets:
                                                   type: boolean
                                                 timeout:
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                           maxUnavailableControlplane:
@@ -1710,8 +1674,7 @@ spec:
                                             type: string
                                           retention:
                                             description: Cluster scan retention
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         required:
                                         - cronSchedule
                                         type: object
@@ -1793,12 +1756,64 @@ spec:
                 required:
                 - name
                 type: object
+              publishConnectionDetailsTo:
+                description: PublishConnectionDetailsTo specifies the connection secret
+                  config which contains a name, metadata and a reference to secret
+                  store config to which any connection details for this managed resource
+                  should be written. Connection details frequently include the endpoint,
+                  username, and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: SecretStoreConfigRef specifies which secret store
+                      config should be used for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: Annotations are the annotations to be added to
+                          connection secret. - For Kubernetes secrets, this will be
+                          used as "metadata.annotations". - It is up to Secret Store
+                          implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: Labels are the labels/tags to be added to connection
+                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store
+                          types.
+                        type: object
+                      type:
+                        description: Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
               writeConnectionSecretToRef:
                 description: WriteConnectionSecretToReference specifies the namespace
                   and name of a Secret to which any connection details for this managed
                   resource should be written. Connection details frequently include
                   the endpoint, username, and password required to connect to the
-                  managed resource.
+                  managed resource. This field is planned to be replaced in a future
+                  release in favor of PublishConnectionDetailsTo. Currently, both
+                  could be set independently and connection details would be published
+                  to both without affecting each other.
                 properties:
                   name:
                     description: Name of the secret.

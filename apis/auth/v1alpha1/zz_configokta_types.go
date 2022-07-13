@@ -41,7 +41,7 @@ type ConfigOktaParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// +kubebuilder:validation:Required
 	DisplayNameField *string `json:"displayNameField" tf:"display_name_field,omitempty"`
@@ -57,7 +57,7 @@ type ConfigOktaParameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// +kubebuilder:validation:Required
 	RancherAPIHost *string `json:"rancherApiHost" tf:"rancher_api_host,omitempty"`

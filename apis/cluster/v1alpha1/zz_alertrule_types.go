@@ -33,7 +33,7 @@ type AlertRuleParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// Alert rule cluster ID
 	// +kubebuilder:validation:Required
@@ -49,11 +49,11 @@ type AlertRuleParameters struct {
 
 	// Alert rule interval seconds
 	// +kubebuilder:validation:Optional
-	GroupIntervalSeconds *int64 `json:"groupIntervalSeconds,omitempty" tf:"group_interval_seconds,omitempty"`
+	GroupIntervalSeconds *float64 `json:"groupIntervalSeconds,omitempty" tf:"group_interval_seconds,omitempty"`
 
 	// Alert rule wait seconds
 	// +kubebuilder:validation:Optional
-	GroupWaitSeconds *int64 `json:"groupWaitSeconds,omitempty" tf:"group_wait_seconds,omitempty"`
+	GroupWaitSeconds *float64 `json:"groupWaitSeconds,omitempty" tf:"group_wait_seconds,omitempty"`
 
 	// Alert rule inherited
 	// +kubebuilder:validation:Optional
@@ -61,7 +61,7 @@ type AlertRuleParameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Alert metric rule
 	// +kubebuilder:validation:Optional
@@ -73,7 +73,7 @@ type AlertRuleParameters struct {
 
 	// Alert rule repeat interval seconds
 	// +kubebuilder:validation:Optional
-	RepeatIntervalSeconds *int64 `json:"repeatIntervalSeconds,omitempty" tf:"repeat_interval_seconds,omitempty"`
+	RepeatIntervalSeconds *float64 `json:"repeatIntervalSeconds,omitempty" tf:"repeat_interval_seconds,omitempty"`
 
 	// Alert rule severity
 	// +kubebuilder:validation:Optional
@@ -131,7 +131,7 @@ type NodeRuleParameters struct {
 
 	// Node rule cpu threshold
 	// +kubebuilder:validation:Optional
-	CPUThreshold *int64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
+	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
 
 	// Node rule condition
 	// +kubebuilder:validation:Optional
@@ -139,7 +139,7 @@ type NodeRuleParameters struct {
 
 	// Node rule mem threshold
 	// +kubebuilder:validation:Optional
-	MemThreshold *int64 `json:"memThreshold,omitempty" tf:"mem_threshold,omitempty"`
+	MemThreshold *float64 `json:"memThreshold,omitempty" tf:"mem_threshold,omitempty"`
 
 	// Node ID
 	// +kubebuilder:validation:Optional
@@ -147,7 +147,7 @@ type NodeRuleParameters struct {
 
 	// Node rule selector
 	// +kubebuilder:validation:Optional
-	Selector map[string]string `json:"selector,omitempty" tf:"selector,omitempty"`
+	Selector map[string]*string `json:"selector,omitempty" tf:"selector,omitempty"`
 }
 
 type SystemServiceRuleObservation struct {

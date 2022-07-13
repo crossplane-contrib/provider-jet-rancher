@@ -20,7 +20,7 @@ limitations under the License.
 package apis
 
 import (
-	zz_runtime "k8s.io/apimachinery/pkg/runtime"
+	"k8s.io/apimachinery/pkg/runtime"
 
 	v1alpha1 "github.com/crossplane-contrib/provider-jet-rancher/apis/app/v1alpha1"
 	v1alpha1auth "github.com/crossplane-contrib/provider-jet-rancher/apis/auth/v1alpha1"
@@ -65,9 +65,9 @@ func init() {
 }
 
 // AddToSchemes may be used to add all resources defined in the project to a Scheme
-var AddToSchemes zz_runtime.SchemeBuilder
+var AddToSchemes runtime.SchemeBuilder
 
 // AddToScheme adds all Resources to the Scheme
-func AddToScheme(s *zz_runtime.Scheme) error {
+func AddToScheme(s *runtime.Scheme) error {
 	return AddToSchemes.AddToScheme(s)
 }

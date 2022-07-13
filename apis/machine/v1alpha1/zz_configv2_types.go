@@ -304,7 +304,7 @@ type ConfigV2Parameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	AzureConfig []AzureConfigParameters `json:"azureConfig,omitempty" tf:"azure_config,omitempty"`
@@ -319,9 +319,12 @@ type ConfigV2Parameters struct {
 	// +kubebuilder:validation:Required
 	GenerateName *string `json:"generateName" tf:"generate_name,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	HarvesterConfig []HarvesterConfigParameters `json:"harvesterConfig,omitempty" tf:"harvester_config,omitempty"`
+
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	LinodeConfig []LinodeConfigParameters `json:"linodeConfig,omitempty" tf:"linode_config,omitempty"`
@@ -393,6 +396,60 @@ type DigitaloceanConfigParameters struct {
 	// Path to file with cloud-init user-data
 	// +kubebuilder:validation:Optional
 	Userdata *string `json:"userdata,omitempty" tf:"userdata,omitempty"`
+}
+
+type HarvesterConfigObservation struct {
+}
+
+type HarvesterConfigParameters struct {
+
+	// CPU count
+	// +kubebuilder:validation:Optional
+	CPUCount *string `json:"cpuCount,omitempty" tf:"cpu_count,omitempty"`
+
+	// Disk bus
+	// +kubebuilder:validation:Optional
+	DiskBus *string `json:"diskBus,omitempty" tf:"disk_bus,omitempty"`
+
+	// Disk size (in GiB)
+	// +kubebuilder:validation:Optional
+	DiskSize *string `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
+
+	// Image name
+	// +kubebuilder:validation:Required
+	ImageName *string `json:"imageName" tf:"image_name,omitempty"`
+
+	// Memory size (in GiB)
+	// +kubebuilder:validation:Optional
+	MemorySize *string `json:"memorySize,omitempty" tf:"memory_size,omitempty"`
+
+	// NetworkData content of cloud-init, base64 is supported
+	// +kubebuilder:validation:Optional
+	NetworkData *string `json:"networkData,omitempty" tf:"network_data,omitempty"`
+
+	// Network model
+	// +kubebuilder:validation:Optional
+	NetworkModel *string `json:"networkModel,omitempty" tf:"network_model,omitempty"`
+
+	// Network name
+	// +kubebuilder:validation:Required
+	NetworkName *string `json:"networkName" tf:"network_name,omitempty"`
+
+	// SSH password
+	// +kubebuilder:validation:Optional
+	SSHPasswordSecretRef *v1.SecretKeySelector `json:"sshPasswordSecretRef,omitempty" tf:"-"`
+
+	// SSH username
+	// +kubebuilder:validation:Required
+	SSHUser *string `json:"sshUser" tf:"ssh_user,omitempty"`
+
+	// UserData content of cloud-init, base64 is supported
+	// +kubebuilder:validation:Optional
+	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
+
+	// Virtual machine namespace
+	// +kubebuilder:validation:Required
+	VMNamespace *string `json:"vmNamespace" tf:"vm_namespace,omitempty"`
 }
 
 type LinodeConfigObservation struct {

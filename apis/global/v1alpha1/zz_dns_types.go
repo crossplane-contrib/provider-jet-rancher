@@ -33,14 +33,14 @@ type DNSParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Fqdn *string `json:"fqdn" tf:"fqdn,omitempty"`
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	MultiClusterAppID *string `json:"multiClusterAppId,omitempty" tf:"multi_cluster_app_id,omitempty"`
@@ -52,7 +52,7 @@ type DNSParameters struct {
 	ProviderID *string `json:"providerId" tf:"provider_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	TTL *int64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 }
 
 // DNSSpec defines the desired state of DNS

@@ -65,14 +65,14 @@ type DNSProviderParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CloudflareConfig []CloudflareConfigParameters `json:"cloudflareConfig,omitempty" tf:"cloudflare_config,omitempty"`
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// +kubebuilder:validation:Required
 	RootDomain *string `json:"rootDomain" tf:"root_domain,omitempty"`

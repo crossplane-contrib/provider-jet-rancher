@@ -35,11 +35,11 @@ type AppParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// Answers of the app
 	// +kubebuilder:validation:Optional
-	Answers map[string]string `json:"answers,omitempty" tf:"answers,omitempty"`
+	Answers map[string]*string `json:"answers,omitempty" tf:"answers,omitempty"`
 
 	// Catalog name of the app
 	// +kubebuilder:validation:Required
@@ -54,7 +54,7 @@ type AppParameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Project ID to add app
 	// +kubebuilder:validation:Required

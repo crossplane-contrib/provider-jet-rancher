@@ -80,11 +80,11 @@ type HostPortParameters struct {
 
 	// max is the end of the range, inclusive.
 	// +kubebuilder:validation:Required
-	Max *int64 `json:"max" tf:"max,omitempty"`
+	Max *float64 `json:"max" tf:"max,omitempty"`
 
 	// min is the start of the range, inclusive.
 	// +kubebuilder:validation:Required
-	Min *int64 `json:"min" tf:"min,omitempty"`
+	Min *float64 `json:"min" tf:"min,omitempty"`
 }
 
 type RangeObservation struct {
@@ -94,11 +94,11 @@ type RangeParameters struct {
 
 	// max is the end of the range, inclusive.
 	// +kubebuilder:validation:Required
-	Max *int64 `json:"max" tf:"max,omitempty"`
+	Max *float64 `json:"max" tf:"max,omitempty"`
 
 	// min is the start of the range, inclusive.
 	// +kubebuilder:validation:Required
-	Min *int64 `json:"min" tf:"min,omitempty"`
+	Min *float64 `json:"min" tf:"min,omitempty"`
 }
 
 type RunAsGroupObservation struct {
@@ -122,11 +122,11 @@ type RunAsGroupRangeParameters struct {
 
 	// max is the end of the range, inclusive.
 	// +kubebuilder:validation:Required
-	Max *int64 `json:"max" tf:"max,omitempty"`
+	Max *float64 `json:"max" tf:"max,omitempty"`
 
 	// min is the start of the range, inclusive.
 	// +kubebuilder:validation:Required
-	Min *int64 `json:"min" tf:"min,omitempty"`
+	Min *float64 `json:"min" tf:"min,omitempty"`
 }
 
 type RunAsUserObservation struct {
@@ -150,11 +150,11 @@ type RunAsUserRangeParameters struct {
 
 	// max is the end of the range, inclusive.
 	// +kubebuilder:validation:Required
-	Max *int64 `json:"max" tf:"max,omitempty"`
+	Max *float64 `json:"max" tf:"max,omitempty"`
 
 	// min is the start of the range, inclusive.
 	// +kubebuilder:validation:Required
-	Min *int64 `json:"min" tf:"min,omitempty"`
+	Min *float64 `json:"min" tf:"min,omitempty"`
 }
 
 type RuntimeClassObservation struct {
@@ -243,7 +243,7 @@ type SecurityPolicyTemplateParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// defaultAddCapabilities is the default set of capabilities that will be added to the container unless the pod spec specifically drops the capability.  You may not list a capability in both defaultAddCapabilities and requiredDropCapabilities. Capabilities added here are implicitly allowed, and need not be included in the allowedCapabilities list.
 	// +kubebuilder:validation:Optional
@@ -283,7 +283,7 @@ type SecurityPolicyTemplateParameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// privileged determines if a pod can request to be run as privileged.
 	// +kubebuilder:validation:Optional
@@ -343,11 +343,11 @@ type SupplementalGroupRangeParameters struct {
 
 	// max is the end of the range, inclusive.
 	// +kubebuilder:validation:Required
-	Max *int64 `json:"max" tf:"max,omitempty"`
+	Max *float64 `json:"max" tf:"max,omitempty"`
 
 	// min is the start of the range, inclusive.
 	// +kubebuilder:validation:Required
-	Min *int64 `json:"min" tf:"min,omitempty"`
+	Min *float64 `json:"min" tf:"min,omitempty"`
 }
 
 // SecurityPolicyTemplateSpec defines the desired state of SecurityPolicyTemplate

@@ -33,7 +33,7 @@ type AlertRuleParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// Alert rule group ID
 	// +kubebuilder:validation:Required
@@ -41,11 +41,11 @@ type AlertRuleParameters struct {
 
 	// Alert rule interval seconds
 	// +kubebuilder:validation:Optional
-	GroupIntervalSeconds *int64 `json:"groupIntervalSeconds,omitempty" tf:"group_interval_seconds,omitempty"`
+	GroupIntervalSeconds *float64 `json:"groupIntervalSeconds,omitempty" tf:"group_interval_seconds,omitempty"`
 
 	// Alert rule wait seconds
 	// +kubebuilder:validation:Optional
-	GroupWaitSeconds *int64 `json:"groupWaitSeconds,omitempty" tf:"group_wait_seconds,omitempty"`
+	GroupWaitSeconds *float64 `json:"groupWaitSeconds,omitempty" tf:"group_wait_seconds,omitempty"`
 
 	// Alert rule inherited
 	// +kubebuilder:validation:Optional
@@ -53,7 +53,7 @@ type AlertRuleParameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Alert metric rule
 	// +kubebuilder:validation:Optional
@@ -69,7 +69,7 @@ type AlertRuleParameters struct {
 
 	// Alert rule repeat interval seconds
 	// +kubebuilder:validation:Optional
-	RepeatIntervalSeconds *int64 `json:"repeatIntervalSeconds,omitempty" tf:"repeat_interval_seconds,omitempty"`
+	RepeatIntervalSeconds *float64 `json:"repeatIntervalSeconds,omitempty" tf:"repeat_interval_seconds,omitempty"`
 
 	// Alert rule severity
 	// +kubebuilder:validation:Optional
@@ -121,11 +121,11 @@ type PodRuleParameters struct {
 
 	// Pod rule restart interval seconds
 	// +kubebuilder:validation:Optional
-	RestartIntervalSeconds *int64 `json:"restartIntervalSeconds,omitempty" tf:"restart_interval_seconds,omitempty"`
+	RestartIntervalSeconds *float64 `json:"restartIntervalSeconds,omitempty" tf:"restart_interval_seconds,omitempty"`
 
 	// Pod rule restart times
 	// +kubebuilder:validation:Optional
-	RestartTimes *int64 `json:"restartTimes,omitempty" tf:"restart_times,omitempty"`
+	RestartTimes *float64 `json:"restartTimes,omitempty" tf:"restart_times,omitempty"`
 }
 
 type WorkloadRuleObservation struct {
@@ -135,11 +135,11 @@ type WorkloadRuleParameters struct {
 
 	// Workload rule available percentage
 	// +kubebuilder:validation:Optional
-	AvailablePercentage *int64 `json:"availablePercentage,omitempty" tf:"available_percentage,omitempty"`
+	AvailablePercentage *float64 `json:"availablePercentage,omitempty" tf:"available_percentage,omitempty"`
 
 	// Workload rule selector
 	// +kubebuilder:validation:Optional
-	Selector map[string]string `json:"selector,omitempty" tf:"selector,omitempty"`
+	Selector map[string]*string `json:"selector,omitempty" tf:"selector,omitempty"`
 
 	// Workload ID
 	// +kubebuilder:validation:Optional

@@ -41,7 +41,7 @@ type TokenParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// Cluster ID for scoped token
 	// +kubebuilder:validation:Optional
@@ -53,7 +53,7 @@ type TokenParameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Renew expired or disabled token
 	// +kubebuilder:validation:Optional
@@ -61,7 +61,7 @@ type TokenParameters struct {
 
 	// Token time to live in seconds
 	// +kubebuilder:validation:Optional
-	TTL *int64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 }
 
 // TokenSpec defines the desired state of Token

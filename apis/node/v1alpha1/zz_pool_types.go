@@ -51,7 +51,7 @@ type PoolParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
-	Annotations map[string]string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// +kubebuilder:validation:Required
 	ClusterID *string `json:"clusterId" tf:"cluster_id,omitempty"`
@@ -60,7 +60,7 @@ type PoolParameters struct {
 	ControlPlane *bool `json:"controlPlane,omitempty" tf:"control_plane,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	DeleteNotReadyAfterSecs *int64 `json:"deleteNotReadyAfterSecs,omitempty" tf:"delete_not_ready_after_secs,omitempty"`
+	DeleteNotReadyAfterSecs *float64 `json:"deleteNotReadyAfterSecs,omitempty" tf:"delete_not_ready_after_secs,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	DrainBeforeDelete *bool `json:"drainBeforeDelete,omitempty" tf:"drain_before_delete,omitempty"`
@@ -73,7 +73,7 @@ type PoolParameters struct {
 
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
-	Labels map[string]string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	NodeTaints []NodeTaintsParameters `json:"nodeTaints,omitempty" tf:"node_taints,omitempty"`
@@ -82,7 +82,7 @@ type PoolParameters struct {
 	NodeTemplateID *string `json:"nodeTemplateId" tf:"node_template_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Quantity *int64 `json:"quantity,omitempty" tf:"quantity,omitempty"`
+	Quantity *float64 `json:"quantity,omitempty" tf:"quantity,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Worker *bool `json:"worker,omitempty" tf:"worker,omitempty"`
