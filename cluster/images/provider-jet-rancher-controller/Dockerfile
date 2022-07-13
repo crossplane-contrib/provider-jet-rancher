@@ -13,7 +13,6 @@ ARG TERRAFORM_PROVIDER_SOURCE
 ARG TERRAFORM_PROVIDER_VERSION
 ARG TERRAFORM_PROVIDER_DOWNLOAD_NAME
 ARG TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX
-ARG TERRAFORM_NATIVE_PROVIDER_BINARY
 ## End of - Provider-dependent configuration
 
 ENV PLUGIN_DIR /terraform/provider-mirror/registry.terraform.io/${TERRAFORM_PROVIDER_SOURCE}/${TERRAFORM_PROVIDER_VERSION}/linux_${ARCH}
@@ -22,17 +21,14 @@ ENV TF_FORK 0
 
 RUN mkdir -p ${PLUGIN_DIR}
 
-ADD https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_${ARCH}.zip /tmp
-ADD ${TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX}/${TERRAFORM_PROVIDER_DOWNLOAD_NAME}_${TERRAFORM_PROVIDER_VERSION}_linux_${ARCH}.zip /tmp
-
 ADD terraformrc.hcl ${TF_CLI_CONFIG_FILE}
 
-RUN unzip /tmp/terraform_${TERRAFORM_VERSION}_linux_${ARCH}.zip -d /usr/local/bin \
+RUN wget -qP /tmp https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_${ARCH}.zip ${TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX}/${TERRAFORM_PROVIDER_DOWNLOAD_NAME}_${TERRAFORM_PROVIDER_VERSION}_linux_${ARCH}.zip \
+  && unzip /tmp/terraform_${TERRAFORM_VERSION}_linux_${ARCH}.zip -d /usr/local/bin \
   && chmod +x /usr/local/bin/terraform \
   && rm /tmp/terraform_${TERRAFORM_VERSION}_linux_${ARCH}.zip \
-  && unzip /tmp/${TERRAFORM_PROVIDER_DOWNLOAD_NAME}_${TERRAFORM_PROVIDER_VERSION}_linux_${ARCH}.zip -d /tmp/ \
-  && mv /tmp/${TERRAFORM_NATIVE_PROVIDER_BINARY} ${PLUGIN_DIR} \
-  && chmod +x ${PLUGIN_DIR}/${TERRAFORM_NATIVE_PROVIDER_BINARY} \
+  && unzip /tmp/${TERRAFORM_PROVIDER_DOWNLOAD_NAME}_${TERRAFORM_PROVIDER_VERSION}_linux_${ARCH}.zip -d ${PLUGIN_DIR} \
+  && chmod +x ${PLUGIN_DIR}/* \
   && rm /tmp/${TERRAFORM_PROVIDER_DOWNLOAD_NAME}_${TERRAFORM_PROVIDER_VERSION}_linux_${ARCH}.zip \
   && chown -R ${USER_ID}:${USER_ID} /terraform
 # End of - Setup Terraform environment
@@ -43,7 +39,6 @@ ADD provider /usr/local/bin/crossplane-provider
 ENV TERRAFORM_VERSION ${TERRAFORM_VERSION}
 ENV TERRAFORM_PROVIDER_SOURCE ${TERRAFORM_PROVIDER_SOURCE}
 ENV TERRAFORM_PROVIDER_VERSION ${TERRAFORM_PROVIDER_VERSION}
-ENV TERRAFORM_NATIVE_PROVIDER_PATH ${PLUGIN_DIR}/${TERRAFORM_NATIVE_PROVIDER_BINARY}
 
 USER ${USER_ID}
 EXPOSE 8080

@@ -13,6 +13,8 @@ export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/rancher/terr
 
 PLATFORMS ?= linux_amd64 linux_arm64
 
+GOLANGCILINT_VERSION := 1.46.2
+
 # -include will silently skip missing files, which allows us
 # to load those files with a target in the Makefile. If only
 # "include" was used, the make command would fail and refuse
