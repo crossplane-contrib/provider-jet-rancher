@@ -1,0 +1,10 @@
+apiVersion: project.rancher.jet.crossplane.io/v1alpha1
+kind: RancherNamespace
+metadata:
+  name: crossplane-namespace
+spec:
+  forProvider:
+    projectIdRef:
+      name: crossplane-project
+  providerConfigRef:
+    name: default

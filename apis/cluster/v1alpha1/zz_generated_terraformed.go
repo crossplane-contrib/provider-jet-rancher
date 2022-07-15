@@ -543,18 +543,18 @@ func (tr *Template) GetTerraformSchemaVersion() int {
 	return 1
 }
 
-// GetTerraformResourceType returns Terraform resource type for this V2
-func (mg *V2) GetTerraformResourceType() string {
-	return "rancher2_cluster_v2"
+// GetTerraformResourceType returns Terraform resource type for this ConfigMap
+func (mg *ConfigMap) GetTerraformResourceType() string {
+	return "rancher2_config_map_v2"
 }
 
-// GetConnectionDetailsMapping for this V2
-func (tr *V2) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"cluster_registration_token": "status.atProvider.clusterRegistrationToken", "kube_config": "status.atProvider.kubeConfig"}
+// GetConnectionDetailsMapping for this ConfigMap
+func (tr *ConfigMap) GetConnectionDetailsMapping() map[string]string {
+	return nil
 }
 
-// GetObservation of this V2
-func (tr *V2) GetObservation() (map[string]interface{}, error) {
+// GetObservation of this ConfigMap
+func (tr *ConfigMap) GetObservation() (map[string]interface{}, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
@@ -563,8 +563,8 @@ func (tr *V2) GetObservation() (map[string]interface{}, error) {
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
-// SetObservation for this V2
-func (tr *V2) SetObservation(obs map[string]interface{}) error {
+// SetObservation for this ConfigMap
+func (tr *ConfigMap) SetObservation(obs map[string]interface{}) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -572,16 +572,16 @@ func (tr *V2) SetObservation(obs map[string]interface{}) error {
 	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
 }
 
-// GetID returns ID of underlying Terraform resource of this V2
-func (tr *V2) GetID() string {
+// GetID returns ID of underlying Terraform resource of this ConfigMap
+func (tr *ConfigMap) GetID() string {
 	if tr.Status.AtProvider.ID == nil {
 		return ""
 	}
 	return *tr.Status.AtProvider.ID
 }
 
-// GetParameters of this V2
-func (tr *V2) GetParameters() (map[string]interface{}, error) {
+// GetParameters of this ConfigMap
+func (tr *ConfigMap) GetParameters() (map[string]interface{}, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
@@ -590,8 +590,8 @@ func (tr *V2) GetParameters() (map[string]interface{}, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetParameters for this V2
-func (tr *V2) SetParameters(params map[string]interface{}) error {
+// SetParameters for this ConfigMap
+func (tr *ConfigMap) SetParameters(params map[string]interface{}) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -599,10 +599,10 @@ func (tr *V2) SetParameters(params map[string]interface{}) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
-// LateInitialize this V2 using its observed tfState.
+// LateInitialize this ConfigMap using its observed tfState.
 // returns True if there are any spec changes for the resource.
-func (tr *V2) LateInitialize(attrs []byte) (bool, error) {
-	params := &V2Parameters{}
+func (tr *ConfigMap) LateInitialize(attrs []byte) (bool, error) {
+	params := &ConfigMapParameters{}
 	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
@@ -613,6 +613,228 @@ func (tr *V2) LateInitialize(attrs []byte) (bool, error) {
 }
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
-func (tr *V2) GetTerraformSchemaVersion() int {
+func (tr *ConfigMap) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this EtcdBackup
+func (mg *EtcdBackup) GetTerraformResourceType() string {
+	return "rancher2_etcd_backup"
+}
+
+// GetConnectionDetailsMapping for this EtcdBackup
+func (tr *EtcdBackup) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"backup_config[*].s3_backup_config[*].access_key": "spec.forProvider.backupConfig[*].s3BackupConfig[*].accessKeySecretRef", "backup_config[*].s3_backup_config[*].secret_key": "spec.forProvider.backupConfig[*].s3BackupConfig[*].secretKeySecretRef"}
+}
+
+// GetObservation of this EtcdBackup
+func (tr *EtcdBackup) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this EtcdBackup
+func (tr *EtcdBackup) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this EtcdBackup
+func (tr *EtcdBackup) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this EtcdBackup
+func (tr *EtcdBackup) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this EtcdBackup
+func (tr *EtcdBackup) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this EtcdBackup using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *EtcdBackup) LateInitialize(attrs []byte) (bool, error) {
+	params := &EtcdBackupParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *EtcdBackup) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this Notifier
+func (mg *Notifier) GetTerraformResourceType() string {
+	return "rancher2_notifier"
+}
+
+// GetConnectionDetailsMapping for this Notifier
+func (tr *Notifier) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"dingtalk_config[*].secret": "spec.forProvider.dingtalkConfig[*].secretSecretRef", "smtp_config[*].password": "spec.forProvider.smtpConfig[*].passwordSecretRef", "wechat_config[*].secret": "spec.forProvider.wechatConfig[*].secretSecretRef"}
+}
+
+// GetObservation of this Notifier
+func (tr *Notifier) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this Notifier
+func (tr *Notifier) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this Notifier
+func (tr *Notifier) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this Notifier
+func (tr *Notifier) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this Notifier
+func (tr *Notifier) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this Notifier using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *Notifier) LateInitialize(attrs []byte) (bool, error) {
+	params := &NotifierParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *Notifier) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this StorageClass
+func (mg *StorageClass) GetTerraformResourceType() string {
+	return "rancher2_storage_class_v2"
+}
+
+// GetConnectionDetailsMapping for this StorageClass
+func (tr *StorageClass) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this StorageClass
+func (tr *StorageClass) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this StorageClass
+func (tr *StorageClass) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this StorageClass
+func (tr *StorageClass) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this StorageClass
+func (tr *StorageClass) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this StorageClass
+func (tr *StorageClass) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this StorageClass using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *StorageClass) LateInitialize(attrs []byte) (bool, error) {
+	params := &StorageClassParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *StorageClass) GetTerraformSchemaVersion() int {
 	return 0
 }

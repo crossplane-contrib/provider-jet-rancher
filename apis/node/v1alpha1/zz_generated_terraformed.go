@@ -25,18 +25,18 @@ import (
 	"github.com/crossplane/terrajet/pkg/resource/json"
 )
 
-// GetTerraformResourceType returns Terraform resource type for this Driver
-func (mg *Driver) GetTerraformResourceType() string {
+// GetTerraformResourceType returns Terraform resource type for this NodeDriver
+func (mg *NodeDriver) GetTerraformResourceType() string {
 	return "rancher2_node_driver"
 }
 
-// GetConnectionDetailsMapping for this Driver
-func (tr *Driver) GetConnectionDetailsMapping() map[string]string {
+// GetConnectionDetailsMapping for this NodeDriver
+func (tr *NodeDriver) GetConnectionDetailsMapping() map[string]string {
 	return nil
 }
 
-// GetObservation of this Driver
-func (tr *Driver) GetObservation() (map[string]interface{}, error) {
+// GetObservation of this NodeDriver
+func (tr *NodeDriver) GetObservation() (map[string]interface{}, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
@@ -45,8 +45,8 @@ func (tr *Driver) GetObservation() (map[string]interface{}, error) {
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
-// SetObservation for this Driver
-func (tr *Driver) SetObservation(obs map[string]interface{}) error {
+// SetObservation for this NodeDriver
+func (tr *NodeDriver) SetObservation(obs map[string]interface{}) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -54,16 +54,16 @@ func (tr *Driver) SetObservation(obs map[string]interface{}) error {
 	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
 }
 
-// GetID returns ID of underlying Terraform resource of this Driver
-func (tr *Driver) GetID() string {
+// GetID returns ID of underlying Terraform resource of this NodeDriver
+func (tr *NodeDriver) GetID() string {
 	if tr.Status.AtProvider.ID == nil {
 		return ""
 	}
 	return *tr.Status.AtProvider.ID
 }
 
-// GetParameters of this Driver
-func (tr *Driver) GetParameters() (map[string]interface{}, error) {
+// GetParameters of this NodeDriver
+func (tr *NodeDriver) GetParameters() (map[string]interface{}, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
@@ -72,8 +72,8 @@ func (tr *Driver) GetParameters() (map[string]interface{}, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetParameters for this Driver
-func (tr *Driver) SetParameters(params map[string]interface{}) error {
+// SetParameters for this NodeDriver
+func (tr *NodeDriver) SetParameters(params map[string]interface{}) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -81,10 +81,10 @@ func (tr *Driver) SetParameters(params map[string]interface{}) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
-// LateInitialize this Driver using its observed tfState.
+// LateInitialize this NodeDriver using its observed tfState.
 // returns True if there are any spec changes for the resource.
-func (tr *Driver) LateInitialize(attrs []byte) (bool, error) {
-	params := &DriverParameters{}
+func (tr *NodeDriver) LateInitialize(attrs []byte) (bool, error) {
+	params := &NodeDriverParameters{}
 	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
@@ -95,22 +95,22 @@ func (tr *Driver) LateInitialize(attrs []byte) (bool, error) {
 }
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
-func (tr *Driver) GetTerraformSchemaVersion() int {
+func (tr *NodeDriver) GetTerraformSchemaVersion() int {
 	return 0
 }
 
-// GetTerraformResourceType returns Terraform resource type for this Pool
-func (mg *Pool) GetTerraformResourceType() string {
+// GetTerraformResourceType returns Terraform resource type for this NodePool
+func (mg *NodePool) GetTerraformResourceType() string {
 	return "rancher2_node_pool"
 }
 
-// GetConnectionDetailsMapping for this Pool
-func (tr *Pool) GetConnectionDetailsMapping() map[string]string {
+// GetConnectionDetailsMapping for this NodePool
+func (tr *NodePool) GetConnectionDetailsMapping() map[string]string {
 	return nil
 }
 
-// GetObservation of this Pool
-func (tr *Pool) GetObservation() (map[string]interface{}, error) {
+// GetObservation of this NodePool
+func (tr *NodePool) GetObservation() (map[string]interface{}, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
@@ -119,8 +119,8 @@ func (tr *Pool) GetObservation() (map[string]interface{}, error) {
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
-// SetObservation for this Pool
-func (tr *Pool) SetObservation(obs map[string]interface{}) error {
+// SetObservation for this NodePool
+func (tr *NodePool) SetObservation(obs map[string]interface{}) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -128,16 +128,16 @@ func (tr *Pool) SetObservation(obs map[string]interface{}) error {
 	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
 }
 
-// GetID returns ID of underlying Terraform resource of this Pool
-func (tr *Pool) GetID() string {
+// GetID returns ID of underlying Terraform resource of this NodePool
+func (tr *NodePool) GetID() string {
 	if tr.Status.AtProvider.ID == nil {
 		return ""
 	}
 	return *tr.Status.AtProvider.ID
 }
 
-// GetParameters of this Pool
-func (tr *Pool) GetParameters() (map[string]interface{}, error) {
+// GetParameters of this NodePool
+func (tr *NodePool) GetParameters() (map[string]interface{}, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
@@ -146,8 +146,8 @@ func (tr *Pool) GetParameters() (map[string]interface{}, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetParameters for this Pool
-func (tr *Pool) SetParameters(params map[string]interface{}) error {
+// SetParameters for this NodePool
+func (tr *NodePool) SetParameters(params map[string]interface{}) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -155,10 +155,10 @@ func (tr *Pool) SetParameters(params map[string]interface{}) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
-// LateInitialize this Pool using its observed tfState.
+// LateInitialize this NodePool using its observed tfState.
 // returns True if there are any spec changes for the resource.
-func (tr *Pool) LateInitialize(attrs []byte) (bool, error) {
-	params := &PoolParameters{}
+func (tr *NodePool) LateInitialize(attrs []byte) (bool, error) {
+	params := &NodePoolParameters{}
 	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
@@ -169,22 +169,22 @@ func (tr *Pool) LateInitialize(attrs []byte) (bool, error) {
 }
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
-func (tr *Pool) GetTerraformSchemaVersion() int {
+func (tr *NodePool) GetTerraformSchemaVersion() int {
 	return 0
 }
 
-// GetTerraformResourceType returns Terraform resource type for this Template
-func (mg *Template) GetTerraformResourceType() string {
+// GetTerraformResourceType returns Terraform resource type for this NodeTemplate
+func (mg *NodeTemplate) GetTerraformResourceType() string {
 	return "rancher2_node_template"
 }
 
-// GetConnectionDetailsMapping for this Template
-func (tr *Template) GetConnectionDetailsMapping() map[string]string {
+// GetConnectionDetailsMapping for this NodeTemplate
+func (tr *NodeTemplate) GetConnectionDetailsMapping() map[string]string {
 	return map[string]string{"amazonec2_config[*].access_key": "spec.forProvider.amazonec2Config[*].accessKeySecretRef", "amazonec2_config[*].secret_key": "spec.forProvider.amazonec2Config[*].secretKeySecretRef", "amazonec2_config[*].session_token": "spec.forProvider.amazonec2Config[*].sessionTokenSecretRef", "auth_certificate_authority": "spec.forProvider.authCertificateAuthoritySecretRef", "auth_key": "spec.forProvider.authKeySecretRef", "azure_config[*].client_id": "spec.forProvider.azureConfig[*].clientIdSecretRef", "azure_config[*].client_secret": "spec.forProvider.azureConfig[*].clientSecretSecretRef", "azure_config[*].subscription_id": "spec.forProvider.azureConfig[*].subscriptionIdSecretRef", "digitalocean_config[*].access_token": "spec.forProvider.digitaloceanConfig[*].accessTokenSecretRef", "digitalocean_config[*].ssh_key_fingerprint": "spec.forProvider.digitaloceanConfig[*].sshKeyFingerprintSecretRef", "harvester_config[*].ssh_password": "spec.forProvider.harvesterConfig[*].sshPasswordSecretRef", "hetzner_config[*].api_token": "spec.forProvider.hetznerConfig[*].apiTokenSecretRef", "linode_config[*].root_pass": "spec.forProvider.linodeConfig[*].rootPassSecretRef", "linode_config[*].token": "spec.forProvider.linodeConfig[*].tokenSecretRef", "opennebula_config[*].password": "spec.forProvider.opennebulaConfig[*].passwordSecretRef", "openstack_config[*].application_credential_secret": "spec.forProvider.openstackConfig[*].applicationCredentialSecretSecretRef", "openstack_config[*].password": "spec.forProvider.openstackConfig[*].passwordSecretRef", "openstack_config[*].private_key_file": "spec.forProvider.openstackConfig[*].privateKeyFileSecretRef", "vsphere_config[*].password": "spec.forProvider.vsphereConfig[*].passwordSecretRef", "vsphere_config[*].ssh_password": "spec.forProvider.vsphereConfig[*].sshPasswordSecretRef"}
 }
 
-// GetObservation of this Template
-func (tr *Template) GetObservation() (map[string]interface{}, error) {
+// GetObservation of this NodeTemplate
+func (tr *NodeTemplate) GetObservation() (map[string]interface{}, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
@@ -193,8 +193,8 @@ func (tr *Template) GetObservation() (map[string]interface{}, error) {
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
-// SetObservation for this Template
-func (tr *Template) SetObservation(obs map[string]interface{}) error {
+// SetObservation for this NodeTemplate
+func (tr *NodeTemplate) SetObservation(obs map[string]interface{}) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -202,16 +202,16 @@ func (tr *Template) SetObservation(obs map[string]interface{}) error {
 	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
 }
 
-// GetID returns ID of underlying Terraform resource of this Template
-func (tr *Template) GetID() string {
+// GetID returns ID of underlying Terraform resource of this NodeTemplate
+func (tr *NodeTemplate) GetID() string {
 	if tr.Status.AtProvider.ID == nil {
 		return ""
 	}
 	return *tr.Status.AtProvider.ID
 }
 
-// GetParameters of this Template
-func (tr *Template) GetParameters() (map[string]interface{}, error) {
+// GetParameters of this NodeTemplate
+func (tr *NodeTemplate) GetParameters() (map[string]interface{}, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
@@ -220,8 +220,8 @@ func (tr *Template) GetParameters() (map[string]interface{}, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetParameters for this Template
-func (tr *Template) SetParameters(params map[string]interface{}) error {
+// SetParameters for this NodeTemplate
+func (tr *NodeTemplate) SetParameters(params map[string]interface{}) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -229,10 +229,10 @@ func (tr *Template) SetParameters(params map[string]interface{}) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
-// LateInitialize this Template using its observed tfState.
+// LateInitialize this NodeTemplate using its observed tfState.
 // returns True if there are any spec changes for the resource.
-func (tr *Template) LateInitialize(attrs []byte) (bool, error) {
-	params := &TemplateParameters{}
+func (tr *NodeTemplate) LateInitialize(attrs []byte) (bool, error) {
+	params := &NodeTemplateParameters{}
 	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
@@ -243,6 +243,6 @@ func (tr *Template) LateInitialize(attrs []byte) (bool, error) {
 }
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
-func (tr *Template) GetTerraformSchemaVersion() int {
+func (tr *NodeTemplate) GetTerraformSchemaVersion() int {
 	return 0
 }

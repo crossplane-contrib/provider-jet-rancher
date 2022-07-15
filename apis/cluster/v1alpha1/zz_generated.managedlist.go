@@ -37,8 +37,26 @@ func (l *AlertRuleList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ConfigMapList.
+func (l *ConfigMapList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this DriverList.
 func (l *DriverList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this EtcdBackupList.
+func (l *EtcdBackupList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -55,8 +73,26 @@ func (l *LoggingList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this NotifierList.
+func (l *NotifierList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this RoleTemplateBindingList.
 func (l *RoleTemplateBindingList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this StorageClassList.
+func (l *StorageClassList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -75,15 +111,6 @@ func (l *SyncList) GetItems() []resource.Managed {
 
 // GetItems of this TemplateList.
 func (l *TemplateList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this V2List.
-func (l *V2List) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

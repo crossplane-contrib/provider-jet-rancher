@@ -19,200 +19,200 @@ package v1alpha1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
-// GetCondition of this Driver.
-func (mg *Driver) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this NodeDriver.
+func (mg *NodeDriver) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this Driver.
-func (mg *Driver) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this NodeDriver.
+func (mg *NodeDriver) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetProviderConfigReference of this Driver.
-func (mg *Driver) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this NodeDriver.
+func (mg *NodeDriver) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 /*
-GetProviderReference of this Driver.
+GetProviderReference of this NodeDriver.
 Deprecated: Use GetProviderConfigReference.
 */
-func (mg *Driver) GetProviderReference() *xpv1.Reference {
+func (mg *NodeDriver) GetProviderReference() *xpv1.Reference {
 	return mg.Spec.ProviderReference
 }
 
-// GetPublishConnectionDetailsTo of this Driver.
-func (mg *Driver) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+// GetPublishConnectionDetailsTo of this NodeDriver.
+func (mg *NodeDriver) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
 }
 
-// GetWriteConnectionSecretToReference of this Driver.
-func (mg *Driver) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this NodeDriver.
+func (mg *NodeDriver) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this Driver.
-func (mg *Driver) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this NodeDriver.
+func (mg *NodeDriver) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this Driver.
-func (mg *Driver) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this NodeDriver.
+func (mg *NodeDriver) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetProviderConfigReference of this Driver.
-func (mg *Driver) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this NodeDriver.
+func (mg *NodeDriver) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 /*
-SetProviderReference of this Driver.
+SetProviderReference of this NodeDriver.
 Deprecated: Use SetProviderConfigReference.
 */
-func (mg *Driver) SetProviderReference(r *xpv1.Reference) {
+func (mg *NodeDriver) SetProviderReference(r *xpv1.Reference) {
 	mg.Spec.ProviderReference = r
 }
 
-// SetPublishConnectionDetailsTo of this Driver.
-func (mg *Driver) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+// SetPublishConnectionDetailsTo of this NodeDriver.
+func (mg *NodeDriver) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
 	mg.Spec.PublishConnectionDetailsTo = r
 }
 
-// SetWriteConnectionSecretToReference of this Driver.
-func (mg *Driver) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this NodeDriver.
+func (mg *NodeDriver) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this Pool.
-func (mg *Pool) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this NodePool.
+func (mg *NodePool) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this Pool.
-func (mg *Pool) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this NodePool.
+func (mg *NodePool) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetProviderConfigReference of this Pool.
-func (mg *Pool) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this NodePool.
+func (mg *NodePool) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 /*
-GetProviderReference of this Pool.
+GetProviderReference of this NodePool.
 Deprecated: Use GetProviderConfigReference.
 */
-func (mg *Pool) GetProviderReference() *xpv1.Reference {
+func (mg *NodePool) GetProviderReference() *xpv1.Reference {
 	return mg.Spec.ProviderReference
 }
 
-// GetPublishConnectionDetailsTo of this Pool.
-func (mg *Pool) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+// GetPublishConnectionDetailsTo of this NodePool.
+func (mg *NodePool) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
 }
 
-// GetWriteConnectionSecretToReference of this Pool.
-func (mg *Pool) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this NodePool.
+func (mg *NodePool) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this Pool.
-func (mg *Pool) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this NodePool.
+func (mg *NodePool) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this Pool.
-func (mg *Pool) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this NodePool.
+func (mg *NodePool) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetProviderConfigReference of this Pool.
-func (mg *Pool) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this NodePool.
+func (mg *NodePool) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 /*
-SetProviderReference of this Pool.
+SetProviderReference of this NodePool.
 Deprecated: Use SetProviderConfigReference.
 */
-func (mg *Pool) SetProviderReference(r *xpv1.Reference) {
+func (mg *NodePool) SetProviderReference(r *xpv1.Reference) {
 	mg.Spec.ProviderReference = r
 }
 
-// SetPublishConnectionDetailsTo of this Pool.
-func (mg *Pool) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+// SetPublishConnectionDetailsTo of this NodePool.
+func (mg *NodePool) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
 	mg.Spec.PublishConnectionDetailsTo = r
 }
 
-// SetWriteConnectionSecretToReference of this Pool.
-func (mg *Pool) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this NodePool.
+func (mg *NodePool) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this Template.
-func (mg *Template) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this NodeTemplate.
+func (mg *NodeTemplate) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this Template.
-func (mg *Template) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this NodeTemplate.
+func (mg *NodeTemplate) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetProviderConfigReference of this Template.
-func (mg *Template) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this NodeTemplate.
+func (mg *NodeTemplate) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 /*
-GetProviderReference of this Template.
+GetProviderReference of this NodeTemplate.
 Deprecated: Use GetProviderConfigReference.
 */
-func (mg *Template) GetProviderReference() *xpv1.Reference {
+func (mg *NodeTemplate) GetProviderReference() *xpv1.Reference {
 	return mg.Spec.ProviderReference
 }
 
-// GetPublishConnectionDetailsTo of this Template.
-func (mg *Template) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+// GetPublishConnectionDetailsTo of this NodeTemplate.
+func (mg *NodeTemplate) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
 }
 
-// GetWriteConnectionSecretToReference of this Template.
-func (mg *Template) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this NodeTemplate.
+func (mg *NodeTemplate) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this Template.
-func (mg *Template) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this NodeTemplate.
+func (mg *NodeTemplate) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this Template.
-func (mg *Template) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this NodeTemplate.
+func (mg *NodeTemplate) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetProviderConfigReference of this Template.
-func (mg *Template) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this NodeTemplate.
+func (mg *NodeTemplate) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 /*
-SetProviderReference of this Template.
+SetProviderReference of this NodeTemplate.
 Deprecated: Use SetProviderConfigReference.
 */
-func (mg *Template) SetProviderReference(r *xpv1.Reference) {
+func (mg *NodeTemplate) SetProviderReference(r *xpv1.Reference) {
 	mg.Spec.ProviderReference = r
 }
 
-// SetPublishConnectionDetailsTo of this Template.
-func (mg *Template) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+// SetPublishConnectionDetailsTo of this NodeTemplate.
+func (mg *NodeTemplate) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
 	mg.Spec.PublishConnectionDetailsTo = r
 }
 
-// SetWriteConnectionSecretToReference of this Template.
-func (mg *Template) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this NodeTemplate.
+func (mg *NodeTemplate) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

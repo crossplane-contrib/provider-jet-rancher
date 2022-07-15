@@ -1,11 +1,15 @@
 package catalog
 
-import "github.com/crossplane/terrajet/pkg/config"
+import (
+	tjconfig "github.com/crossplane/terrajet/pkg/config"
+)
 
-// Customize configures configures individual resources by adding custom ResourceConfigurators.
-func Customize(p *config.Provider) {
-	p.AddResourceConfigurator("rancher_catalog", func(r *config.Resource) {
+// Configure configures the rancher2_catalog group
+func Configure(p *tjconfig.Provider) {
+	p.AddResourceConfigurator("rancher2_catalog", func(r *tjconfig.Resource) {
+		r.ExternalName = tjconfig.NameAsIdentifier
 
-		r.ShortGroup = "catalog"
+		// Currently not supported by Terrajet (v0.4)
+		// r.TerraformResource.Schema["scope"].Default = "global"
 	})
 }

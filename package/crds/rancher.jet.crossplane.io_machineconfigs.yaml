@@ -1,0 +1,1122 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.8.0
+  creationTimestamp: null
+  name: machineconfigs.rancher.jet.crossplane.io
+spec:
+  group: rancher.jet.crossplane.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - rancherjet
+    kind: MachineConfig
+    listKind: MachineConfigList
+    plural: machineconfigs
+    singular: machineconfig
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: MachineConfig is the Schema for the MachineConfigs API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: MachineConfigSpec defines the desired state of MachineConfig
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: DeletionPolicy specifies what will happen to the underlying
+                  external when this managed resource is deleted - either "Delete"
+                  or "Orphan" the external resource.
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  amazonec2Config:
+                    items:
+                      properties:
+                        accessKeySecretRef:
+                          description: AWS Access Key
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        ami:
+                          description: AWS machine image
+                          type: string
+                        blockDurationMinutes:
+                          description: AWS spot instance duration in minutes (60,
+                            120, 180, 240, 300, or 360)
+                          type: string
+                        deviceName:
+                          description: AWS root device name
+                          type: string
+                        encryptEbsVolume:
+                          description: Encrypt EBS volume
+                          type: boolean
+                        endpoint:
+                          description: Optional endpoint URL (hostname only or fully
+                            qualified URI)
+                          type: string
+                        httpEndpoint:
+                          description: Enables or disables the HTTP metadata endpoint
+                            on your instances
+                          type: string
+                        httpTokens:
+                          description: The state of token usage for your instance
+                            metadata requests
+                          type: string
+                        iamInstanceProfile:
+                          description: AWS IAM Instance Profile
+                          type: string
+                        insecureTransport:
+                          description: Disable SSL when sending requests
+                          type: boolean
+                        instanceType:
+                          description: AWS instance type
+                          type: string
+                        keypairName:
+                          description: AWS keypair to use; requires --amazonec2-ssh-keypath
+                          type: string
+                        kmsKey:
+                          description: Custom KMS key ID using the AWS Managed CMK
+                          type: string
+                        monitoring:
+                          description: Set this flag to enable CloudWatch monitoring
+                          type: boolean
+                        openPort:
+                          description: Make the specified port number accessible from
+                            the Internet
+                          items:
+                            type: string
+                          type: array
+                        privateAddressOnly:
+                          description: Only use a private IP address
+                          type: boolean
+                        region:
+                          description: AWS Region
+                          type: string
+                        requestSpotInstance:
+                          description: Set this flag to request spot instance
+                          type: boolean
+                        retries:
+                          description: Set retry count for recoverable failures (use
+                            -1 to disable)
+                          type: string
+                        rootSize:
+                          description: AWS root disk size (in GB)
+                          type: string
+                        secretKeySecretRef:
+                          description: AWS Secret Key
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        securityGroup:
+                          description: AWS VPC security group
+                          items:
+                            type: string
+                          type: array
+                        securityGroupReadonly:
+                          description: Skip adding default rules to security groups
+                          type: boolean
+                        sessionTokenSecretRef:
+                          description: AWS Session Token
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        spotPrice:
+                          description: AWS spot instance bid price (in dollar)
+                          type: string
+                        sshKeyContentsSecretRef:
+                          description: SSH Key file contents for sshKeyContents
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        sshUser:
+                          description: Set the name of the ssh user
+                          type: string
+                        subnetId:
+                          description: AWS VPC subnet id
+                          type: string
+                        tags:
+                          description: AWS Tags (e.g. key1,value1,key2,value2)
+                          type: string
+                        useEbsOptimizedInstance:
+                          description: Create an EBS optimized instance
+                          type: boolean
+                        usePrivateAddress:
+                          description: Force the usage of private IP address
+                          type: boolean
+                        userdata:
+                          description: Path to file with cloud-init user data
+                          type: string
+                        volumeType:
+                          description: Amazon EBS volume type
+                          type: string
+                        vpcId:
+                          description: AWS VPC id
+                          type: string
+                        zone:
+                          description: AWS zone for instance (i.e. a,b,c,d,e)
+                          type: string
+                      required:
+                      - ami
+                      - region
+                      - securityGroup
+                      - subnetId
+                      - vpcId
+                      - zone
+                      type: object
+                    type: array
+                  annotations:
+                    additionalProperties:
+                      type: string
+                    description: Annotations of the resource
+                    type: object
+                  azureConfig:
+                    items:
+                      properties:
+                        availabilitySet:
+                          description: Azure Availability Set to place the virtual
+                            machine into
+                          type: string
+                        clientIdSecretRef:
+                          description: Azure Service Principal Account ID (optional,
+                            browser auth is used if not specified)
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        clientSecretSecretRef:
+                          description: Azure Service Principal Account password (optional,
+                            browser auth is used if not specified)
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        customData:
+                          description: Path to file with custom-data
+                          type: string
+                        diskSize:
+                          description: Disk size if using managed disk
+                          type: string
+                        dns:
+                          description: A unique DNS label for the public IP adddress
+                          type: string
+                        dockerPort:
+                          description: Port number for Docker engine
+                          type: string
+                        environment:
+                          description: Azure environment (e.g. AzurePublicCloud, AzureChinaCloud)
+                          type: string
+                        faultDomainCount:
+                          description: Fault domain count to use for availability
+                            set
+                          type: string
+                        image:
+                          description: Azure virtual machine OS image
+                          type: string
+                        location:
+                          description: Azure region to create the virtual machine
+                          type: string
+                        managedDisks:
+                          description: Configures VM and availability set for managed
+                            disks
+                          type: boolean
+                        noPublicIp:
+                          description: Do not create a public IP address for the machine
+                          type: boolean
+                        nsg:
+                          description: Azure Network Security Group to assign this
+                            node to (accepts either a name or resource ID, default
+                            is to create a new NSG for each machine)
+                          type: string
+                        openPort:
+                          description: Make the specified port number accessible from
+                            the Internet
+                          items:
+                            type: string
+                          type: array
+                        privateIpAddress:
+                          description: Specify a static private IP address for the
+                            machine
+                          type: string
+                        resourceGroup:
+                          description: Azure Resource Group name (will be created
+                            if missing)
+                          type: string
+                        size:
+                          description: Size for Azure Virtual Machine
+                          type: string
+                        sshUser:
+                          description: Username for SSH login
+                          type: string
+                        staticPublicIp:
+                          description: Assign a static public IP address to the machine
+                          type: boolean
+                        storageType:
+                          description: Type of Storage Account to host the OS Disk
+                            for the machine
+                          type: string
+                        subnet:
+                          description: Azure Subnet Name to be used within the Virtual
+                            Network
+                          type: string
+                        subnetPrefix:
+                          description: Private CIDR block to be used for the new subnet,
+                            should comply RFC 1918
+                          type: string
+                        subscriptionIdSecretRef:
+                          description: Azure Subscription ID
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        tenantIdSecretRef:
+                          description: Azure Tenant ID
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        updateDomainCount:
+                          description: Update domain count to use for availability
+                            set
+                          type: string
+                        usePrivateIp:
+                          description: Use private IP address of the machine to connect
+                          type: boolean
+                        vnet:
+                          description: Azure Virtual Network name to connect the virtual
+                            machine (in [resourcegroup:]name format)
+                          type: string
+                      type: object
+                    type: array
+                  digitaloceanConfig:
+                    items:
+                      properties:
+                        accessTokenSecretRef:
+                          description: Digital Ocean access token
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        backups:
+                          description: Enable backups for droplet
+                          type: boolean
+                        image:
+                          description: Digital Ocean Image
+                          type: string
+                        ipv6:
+                          description: Enable ipv6 for droplet
+                          type: boolean
+                        monitoring:
+                          description: Enable monitoring for droplet
+                          type: boolean
+                        privateNetworking:
+                          description: Enable private networking for droplet
+                          type: boolean
+                        region:
+                          description: Digital Ocean region
+                          type: string
+                        size:
+                          description: Digital Ocean size
+                          type: string
+                        sshKeyContentsSecretRef:
+                          description: SSH private key contents
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        sshKeyFingerprintSecretRef:
+                          description: SSH key fingerprint
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        sshPort:
+                          description: SSH port
+                          type: string
+                        sshUser:
+                          description: SSH username
+                          type: string
+                        tags:
+                          description: Comma-separated list of tags to apply to the
+                            Droplet
+                          type: string
+                        userdata:
+                          description: Path to file with cloud-init user-data
+                          type: string
+                      type: object
+                    type: array
+                  fleetNamespace:
+                    type: string
+                  generateName:
+                    description: Cluster V2 generate name. The pattern to generate
+                      machine config name. e.g  generate_name="prod-pool1" will generate
+                      "nc-prod-pool1-?????" names
+                    type: string
+                  harvesterConfig:
+                    items:
+                      properties:
+                        cpuCount:
+                          description: CPU count
+                          type: string
+                        diskBus:
+                          description: Disk bus
+                          type: string
+                        diskSize:
+                          description: Disk size (in GiB)
+                          type: string
+                        imageName:
+                          description: Image name
+                          type: string
+                        memorySize:
+                          description: Memory size (in GiB)
+                          type: string
+                        networkData:
+                          description: NetworkData content of cloud-init, base64 is
+                            supported
+                          type: string
+                        networkModel:
+                          description: Network model
+                          type: string
+                        networkName:
+                          description: Network name
+                          type: string
+                        sshPasswordSecretRef:
+                          description: SSH password
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        sshUser:
+                          description: SSH username
+                          type: string
+                        userData:
+                          description: UserData content of cloud-init, base64 is supported
+                          type: string
+                        vmNamespace:
+                          description: Virtual machine namespace
+                          type: string
+                      required:
+                      - imageName
+                      - networkName
+                      - sshUser
+                      - vmNamespace
+                      type: object
+                    type: array
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: Labels of the resource
+                    type: object
+                  linodeConfig:
+                    items:
+                      properties:
+                        authorizedUsers:
+                          description: Linode user accounts (seperated by commas)
+                            whose Linode SSH keys will be permitted root access to
+                            the created node
+                          type: string
+                        createPrivateIp:
+                          description: Create private IP for the instance
+                          type: boolean
+                        dockerPort:
+                          description: Docker Port
+                          type: string
+                        image:
+                          description: Specifies the Linode Instance image which determines
+                            the OS distribution and base files
+                          type: string
+                        instanceType:
+                          description: Specifies the Linode Instance type which determines
+                            CPU, memory, disk size, etc.
+                          type: string
+                        label:
+                          description: Linode Instance Label
+                          type: string
+                        region:
+                          description: Specifies the region (location) of the Linode
+                            instance
+                          type: string
+                        rootPassSecretRef:
+                          description: Root Password
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        sshPort:
+                          description: Linode Instance SSH Port
+                          type: string
+                        sshUser:
+                          description: Specifies the user as which docker-machine
+                            should log in to the Linode instance to install Docker.
+                          type: string
+                        stackscript:
+                          description: Specifies the Linode StackScript to use to
+                            create the instance
+                          type: string
+                        stackscriptData:
+                          description: A JSON string specifying data for the selected
+                            StackScript
+                          type: string
+                        swapSize:
+                          description: Linode Instance Swap Size (MB)
+                          type: string
+                        tags:
+                          description: A comma separated list of tags to apply to
+                            the the Linode resource
+                          type: string
+                        tokenSecretRef:
+                          description: Linode API Token
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        uaPrefix:
+                          description: Prefix the User-Agent in Linode API calls with
+                            some 'product/version'
+                          type: string
+                      type: object
+                    type: array
+                  openstackConfig:
+                    items:
+                      properties:
+                        activeTimeout:
+                          type: string
+                        applicationCredentialId:
+                          type: string
+                        applicationCredentialName:
+                          type: string
+                        applicationCredentialSecretSecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        authUrl:
+                          type: string
+                        availabilityZone:
+                          type: string
+                        bootFromVolume:
+                          type: boolean
+                        cacert:
+                          type: string
+                        configDrive:
+                          type: boolean
+                        domainId:
+                          type: string
+                        domainName:
+                          type: string
+                        endpointType:
+                          type: string
+                        flavorId:
+                          type: string
+                        flavorName:
+                          type: string
+                        floatingIpPool:
+                          type: string
+                        imageId:
+                          type: string
+                        imageName:
+                          type: string
+                        insecure:
+                          type: boolean
+                        ipVersion:
+                          type: string
+                        keypairName:
+                          type: string
+                        netId:
+                          type: string
+                        netName:
+                          type: string
+                        novaNetwork:
+                          type: boolean
+                        passwordSecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        privateKeyFileSecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        region:
+                          type: string
+                        secGroups:
+                          type: string
+                        sshPort:
+                          type: string
+                        sshUser:
+                          type: string
+                        tenantDomainId:
+                          type: string
+                        tenantDomainName:
+                          type: string
+                        tenantId:
+                          type: string
+                        tenantName:
+                          type: string
+                        userDataFile:
+                          type: string
+                        userDomainId:
+                          type: string
+                        userDomainName:
+                          type: string
+                        username:
+                          type: string
+                        volumeDevicePath:
+                          type: string
+                        volumeId:
+                          type: string
+                        volumeName:
+                          type: string
+                        volumeSize:
+                          type: string
+                        volumeType:
+                          type: string
+                      required:
+                      - authUrl
+                      - availabilityZone
+                      - region
+                      type: object
+                    type: array
+                  vsphereConfig:
+                    items:
+                      properties:
+                        boot2dockerUrl:
+                          description: vSphere URL for boot2docker image
+                          type: string
+                        cfgparam:
+                          description: vSphere vm configuration parameters (used for
+                            guestinfo)
+                          items:
+                            type: string
+                          type: array
+                        cloneFrom:
+                          description: If you choose creation type clone a name of
+                            what you want to clone is required
+                          type: string
+                        cloudConfig:
+                          description: Filepath to a cloud-config yaml file to put
+                            into the ISO user-data
+                          type: string
+                        cloudinit:
+                          description: vSphere cloud-init filepath or url to add to
+                            guestinfo
+                          type: string
+                        contentLibrary:
+                          description: If you choose to clone from a content library
+                            template specify the name of the library
+                          type: string
+                        cpuCount:
+                          description: vSphere CPU number for docker VM
+                          type: string
+                        creationType:
+                          description: 'Creation type when creating a new virtual
+                            machine. Supported values: vm, template, library, legacy'
+                          type: string
+                        customAttributes:
+                          description: vSphere custom attributes, format key/value
+                            e.g. '200=my custom value'
+                          items:
+                            type: string
+                          type: array
+                        datacenter:
+                          description: vSphere datacenter for virtual machine
+                          type: string
+                        datastore:
+                          description: vSphere datastore for virtual machine
+                          type: string
+                        datastoreCluster:
+                          description: vSphere datastore cluster for virtual machine
+                          type: string
+                        diskSize:
+                          description: vSphere size of disk for docker VM (in MB)
+                          type: string
+                        folder:
+                          description: vSphere folder for the docker VM. This folder
+                            must already exist in the datacenter
+                          type: string
+                        hostsystem:
+                          description: vSphere compute resource where the docker VM
+                            will be instantiated. This can be omitted if using a cluster
+                            with DRS
+                          type: string
+                        memorySize:
+                          description: vSphere size of memory for docker VM (in MB)
+                          type: string
+                        network:
+                          description: vSphere network where the virtual machine will
+                            be attached
+                          items:
+                            type: string
+                          type: array
+                        passwordSecretRef:
+                          description: vSphere password
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        pool:
+                          description: vSphere resource pool for docker VM
+                          type: string
+                        sshPasswordSecretRef:
+                          description: If using a non-B2D image you can specify the
+                            ssh password
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        sshPort:
+                          description: If using a non-B2D image you can specify the
+                            ssh port
+                          type: string
+                        sshUser:
+                          description: If using a non-B2D image you can specify the
+                            ssh user
+                          type: string
+                        sshUserGroup:
+                          description: If using a non-B2D image the uploaded keys
+                            will need chown'ed, defaults to staff e.g. docker:staff
+                          type: string
+                        tags:
+                          description: vSphere tags id e.g. urn:xxx
+                          items:
+                            type: string
+                          type: array
+                        username:
+                          description: vSphere username
+                          type: string
+                        vappIpAllocationPolicy:
+                          description: 'vSphere vApp IP allocation policy. Supported
+                            values are: dhcp, fixed, transient and fixedAllocated'
+                          type: string
+                        vappIpProtocol:
+                          description: 'vSphere vApp IP protocol for this deployment.
+                            Supported values are: IPv4 and IPv6'
+                          type: string
+                        vappProperty:
+                          description: vSphere vApp properties
+                          items:
+                            type: string
+                          type: array
+                        vappTransport:
+                          description: 'vSphere OVF environment transports to use
+                            for properties. Supported values are: iso and com.vmware.guestInfo'
+                          type: string
+                        vcenter:
+                          description: vSphere IP/hostname for vCenter
+                          type: string
+                        vcenterPort:
+                          description: vSphere Port for vCenter
+                          type: string
+                      type: object
+                    type: array
+                required:
+                - generateName
+                type: object
+              providerConfigRef:
+                default:
+                  name: default
+                description: ProviderConfigReference specifies how the provider that
+                  will be used to create, observe, update, and delete this managed
+                  resource should be configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - name
+                type: object
+              providerRef:
+                description: 'ProviderReference specifies the provider that will be
+                  used to create, observe, update, and delete this managed resource.
+                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: PublishConnectionDetailsTo specifies the connection secret
+                  config which contains a name, metadata and a reference to secret
+                  store config to which any connection details for this managed resource
+                  should be written. Connection details frequently include the endpoint,
+                  username, and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: SecretStoreConfigRef specifies which secret store
+                      config should be used for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: Annotations are the annotations to be added to
+                          connection secret. - For Kubernetes secrets, this will be
+                          used as "metadata.annotations". - It is up to Secret Store
+                          implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: Labels are the labels/tags to be added to connection
+                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store
+                          types.
+                        type: object
+                      type:
+                        description: Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: WriteConnectionSecretToReference specifies the namespace
+                  and name of a Secret to which any connection details for this managed
+                  resource should be written. Connection details frequently include
+                  the endpoint, username, and password required to connect to the
+                  managed resource. This field is planned to be replaced in a future
+                  release in favor of PublishConnectionDetailsTo. Currently, both
+                  could be set independently and connection details would be published
+                  to both without affecting each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+          status:
+            description: MachineConfigStatus defines the observed state of MachineConfig.
+            properties:
+              atProvider:
+                properties:
+                  id:
+                    type: string
+                  kind:
+                    type: string
+                  resourceVersion:
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: LastTransitionTime is the last time this condition
+                        transitioned from one status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A Message containing details about this condition's
+                        last transition from one status to another, if any.
+                      type: string
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: Type of this condition. At most one of each condition
+                        type may apply to a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

@@ -66,6 +66,29 @@ spec:
                   clusterId:
                     description: Cluster id to sync
                     type: string
+                  clusterIdRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  clusterIdSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
                   nodePoolIds:
                     description: Cluster node pool ids
                     items:
@@ -86,8 +109,6 @@ spec:
                   waitMonitoring:
                     description: Wait until monitoring is up and running
                     type: boolean
-                required:
-                - clusterId
                 type: object
               providerConfigRef:
                 default:
