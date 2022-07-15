@@ -1117,23 +1117,9 @@ spec:
                         enableKubernetesAlpha:
                           description: Enable Kubernetes alpha
                           type: boolean
-                        googleCredentialSecretSecretRef:
-                          description: Google credential secret
-                          properties:
-                            key:
-                              description: The key to select.
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                            namespace:
-                              description: Namespace of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          - namespace
-                          type: object
+                        googleCredentialSecret:
+                          description: The GKE Cloud Credential ID to use
+                          type: string
                         imported:
                           description: Is GKE cluster imported?
                           type: boolean
@@ -1374,7 +1360,7 @@ spec:
                             is empty
                           type: string
                       required:
-                      - googleCredentialSecretSecretRef
+                      - googleCredentialSecret
                       - name
                       - projectId
                       type: object
