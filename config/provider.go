@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	"github.com/crossplane-contrib/provider-jet-rancher/config/cluster"
+	"github.com/crossplane-contrib/provider-jet-rancher/config/namespace"
 )
 
 const (
@@ -49,6 +50,7 @@ func GetProvider() *tjconfig.Provider {
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions
 		cluster.Configure,
+		namespace.Configure,
 	} {
 		configure(pc)
 	}

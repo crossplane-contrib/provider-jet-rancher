@@ -88,11 +88,11 @@ type LimitParameters struct {
 	ServicesNodePorts *string `json:"servicesNodePorts,omitempty" tf:"services_node_ports,omitempty"`
 }
 
-type NamespaceObservation struct {
+type RancherNamespaceObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
-type NamespaceParameters struct {
+type RancherNamespaceParameters struct {
 
 	// Annotations of the resource
 	// +kubebuilder:validation:Optional
@@ -110,8 +110,15 @@ type NamespaceParameters struct {
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Project ID where k8s namespace belongs
-	// +kubebuilder:validation:Required
-	ProjectID *string `json:"projectId" tf:"project_id,omitempty"`
+	// +crossplane:generate:reference:type=Project
+	// +kubebuilder:validation:Optional
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ProjectIDRef *v1.Reference `json:"projectIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	ResourceQuota []ResourceQuotaParameters `json:"resourceQuota,omitempty" tf:"resource_quota,omitempty"`
@@ -130,51 +137,51 @@ type ResourceQuotaParameters struct {
 	Limit []LimitParameters `json:"limit" tf:"limit,omitempty"`
 }
 
-// NamespaceSpec defines the desired state of Namespace
-type NamespaceSpec struct {
+// RancherNamespaceSpec defines the desired state of RancherNamespace
+type RancherNamespaceSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     NamespaceParameters `json:"forProvider"`
+	ForProvider     RancherNamespaceParameters `json:"forProvider"`
 }
 
-// NamespaceStatus defines the observed state of Namespace.
-type NamespaceStatus struct {
+// RancherNamespaceStatus defines the observed state of RancherNamespace.
+type RancherNamespaceStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        NamespaceObservation `json:"atProvider,omitempty"`
+	AtProvider        RancherNamespaceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// Namespace is the Schema for the Namespaces API
+// RancherNamespace is the Schema for the RancherNamespaces API
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,rancherjet}
-type Namespace struct {
+type RancherNamespace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NamespaceSpec   `json:"spec"`
-	Status            NamespaceStatus `json:"status,omitempty"`
+	Spec              RancherNamespaceSpec   `json:"spec"`
+	Status            RancherNamespaceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// NamespaceList contains a list of Namespaces
-type NamespaceList struct {
+// RancherNamespaceList contains a list of RancherNamespaces
+type RancherNamespaceList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Namespace `json:"items"`
+	Items           []RancherNamespace `json:"items"`
 }
 
 // Repository type metadata.
 var (
-	Namespace_Kind             = "Namespace"
-	Namespace_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Namespace_Kind}.String()
-	Namespace_KindAPIVersion   = Namespace_Kind + "." + CRDGroupVersion.String()
-	Namespace_GroupVersionKind = CRDGroupVersion.WithKind(Namespace_Kind)
+	RancherNamespace_Kind             = "RancherNamespace"
+	RancherNamespace_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: RancherNamespace_Kind}.String()
+	RancherNamespace_KindAPIVersion   = RancherNamespace_Kind + "." + CRDGroupVersion.String()
+	RancherNamespace_GroupVersionKind = CRDGroupVersion.WithKind(RancherNamespace_Kind)
 )
 
 func init() {
-	SchemeBuilder.Register(&Namespace{}, &NamespaceList{})
+	SchemeBuilder.Register(&RancherNamespace{}, &RancherNamespaceList{})
 }

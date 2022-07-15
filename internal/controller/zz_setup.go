@@ -64,9 +64,9 @@ import (
 	certificate "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/certificate"
 	cluster "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/cluster"
 	feature "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/feature"
-	namespace "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/namespace"
 	notifier "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/notifier"
 	project "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/project"
+	ranchernamespace "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/ranchernamespace"
 	registry "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/registry"
 	setting "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/setting"
 	token "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/token"
@@ -122,9 +122,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		certificate.Setup,
 		cluster.Setup,
 		feature.Setup,
-		namespace.Setup,
 		notifier.Setup,
 		project.Setup,
+		ranchernamespace.Setup,
 		registry.Setup,
 		setting.Setup,
 		token.Setup,
