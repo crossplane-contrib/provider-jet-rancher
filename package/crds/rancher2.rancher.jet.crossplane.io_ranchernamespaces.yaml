@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: namespaces.rancher2.rancher.jet.crossplane.io
+  name: ranchernamespaces.rancher2.rancher.jet.crossplane.io
 spec:
   group: rancher2.rancher.jet.crossplane.io
   names:
@@ -13,10 +13,10 @@ spec:
     - crossplane
     - managed
     - rancherjet
-    kind: Namespace
-    listKind: NamespaceList
-    plural: namespaces
-    singular: namespace
+    kind: RancherNamespace
+    listKind: RancherNamespaceList
+    plural: ranchernamespaces
+    singular: ranchernamespace
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,7 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Namespace is the Schema for the Namespaces API
+        description: RancherNamespace is the Schema for the RancherNamespaces API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,7 +50,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: NamespaceSpec defines the desired state of Namespace
+            description: RancherNamespaceSpec defines the desired state of RancherNamespace
             properties:
               deletionPolicy:
                 default: Delete
@@ -93,6 +93,29 @@ spec:
                   projectId:
                     description: Project ID where k8s namespace belongs
                     type: string
+                  projectIdRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  projectIdSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
                   resourceQuota:
                     items:
                       properties:
@@ -134,8 +157,6 @@ spec:
                   waitForCluster:
                     description: Wait for cluster becomes active
                     type: boolean
-                required:
-                - projectId
                 type: object
               providerConfigRef:
                 default:
@@ -234,7 +255,7 @@ spec:
             - forProvider
             type: object
           status:
-            description: NamespaceStatus defines the observed state of Namespace.
+            description: RancherNamespaceStatus defines the observed state of RancherNamespace.
             properties:
               atProvider:
                 properties:
