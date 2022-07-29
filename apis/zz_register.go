@@ -36,7 +36,7 @@ import (
 	v1alpha1project "github.com/crossplane-contrib/provider-jet-rancher/apis/project/v1alpha1"
 	v1alpha1rancher "github.com/crossplane-contrib/provider-jet-rancher/apis/rancher/v1alpha1"
 	v1alpha1secret "github.com/crossplane-contrib/provider-jet-rancher/apis/secret/v1alpha1"
-	v1alpha1secretv2 "github.com/crossplane-contrib/provider-jet-rancher/apis/secretv2/v1alpha1"
+	v1alpha2secretv2 "github.com/crossplane-contrib/provider-jet-rancher/apis/secretv2/v1alpha2"
 	v1alpha1apis "github.com/crossplane-contrib/provider-jet-rancher/apis/v1alpha1"
 )
 
@@ -57,7 +57,7 @@ func init() {
 		v1alpha1project.SchemeBuilder.AddToScheme,
 		v1alpha1rancher.SchemeBuilder.AddToScheme,
 		v1alpha1secret.SchemeBuilder.AddToScheme,
-		v1alpha1secretv2.SchemeBuilder.AddToScheme,
+		v1alpha2secretv2.SchemeBuilder.AddToScheme,
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 	)
 }
