@@ -1,0 +1,30 @@
+apiVersion: authconfig.rancher.jet.crossplane.io/v1alpha1
+kind: GitHub
+metadata:
+  name: github-auth-config
+spec:
+  forProvider:
+    enabled: false
+    hostname: github.crossplane.io
+    clientIdSecretRef:
+      name: github-secret
+      namespace: crossplane-system
+      key: clientId
+    clientSecretSecretRef:
+      name: github-secret
+      namespace: crossplane-system
+      key: clientSecret
+  providerConfigRef:
+    name: default
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: github-secret
+  namespace: crossplane-system
+type: Opaque
+stringData:
+  clientId: CROSSPLANE-CLIENT
+  clientSecret: t0ps3cr3t11

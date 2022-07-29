@@ -21,116 +21,116 @@ import (
 
 	"github.com/crossplane/terrajet/pkg/controller"
 
-	v2 "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/app/v2"
-	configactivedirectory "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/auth/configactivedirectory"
-	configadfs "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/auth/configadfs"
-	configazuread "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/auth/configazuread"
-	configfreeipa "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/auth/configfreeipa"
-	configgithub "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/auth/configgithub"
-	configkeycloak "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/auth/configkeycloak"
-	configokta "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/auth/configokta"
-	configopenldap "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/auth/configopenldap"
-	configping "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/auth/configping"
-	v2catalog "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/catalog/v2"
-	credential "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/cloud/credential"
+	token "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/admin/token"
+	app "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/app/app"
+	appappv2 "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/appv2/app"
+	multiclusterapp "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/appv2/multiclusterapp"
+	activedirectory "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/authconfig/activedirectory"
+	adfs "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/authconfig/adfs"
+	azuread "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/authconfig/azuread"
+	freeipa "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/authconfig/freeipa"
+	github "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/authconfig/github"
+	keycloak "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/authconfig/keycloak"
+	okta "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/authconfig/okta"
+	openldap "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/authconfig/openldap"
+	ping "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/authconfig/ping"
+	catalog "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/catalog/catalog"
+	catalogcatalogv2 "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/catalogv2/catalog"
 	alertgroup "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/cluster/alertgroup"
 	alertrule "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/cluster/alertrule"
+	cluster "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/cluster/cluster"
+	configmap "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/cluster/configmap"
 	driver "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/cluster/driver"
+	etcdbackup "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/cluster/etcdbackup"
 	logging "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/cluster/logging"
+	notifier "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/cluster/notifier"
 	roletemplatebinding "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/cluster/roletemplatebinding"
+	storageclass "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/cluster/storageclass"
 	sync "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/cluster/sync"
 	template "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/cluster/template"
-	v2cluster "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/cluster/v2"
-	mapv2 "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/config/mapv2"
-	backup "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/etcd/backup"
+	clusterclusterv2 "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/clusterv2/cluster"
 	dns "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/global/dns"
 	dnsprovider "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/global/dnsprovider"
 	role "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/global/role"
 	rolebinding "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/global/rolebinding"
-	configv2 "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/machine/configv2"
-	clusterapp "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/multi/clusterapp"
-	drivernode "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/node/driver"
-	pool "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/node/pool"
-	templatenode "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/node/template"
-	securitypolicytemplate "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/pod/securitypolicytemplate"
+	nodedriver "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/node/nodedriver"
+	nodepool "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/node/nodepool"
+	nodetemplate "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/node/nodetemplate"
 	alertgroupproject "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/project/alertgroup"
 	alertruleproject "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/project/alertrule"
+	certificate "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/project/certificate"
 	loggingproject "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/project/logging"
+	project "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/project/project"
+	ranchernamespace "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/project/ranchernamespace"
+	registry "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/project/registry"
 	roletemplatebindingproject "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/project/roletemplatebinding"
 	providerconfig "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/providerconfig"
-	app "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/app"
-	bootstrap "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/bootstrap"
-	catalog "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/catalog"
-	certificate "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/certificate"
-	cluster "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/cluster"
-	feature "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/feature"
-	notifier "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/notifier"
-	project "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/project"
-	ranchernamespace "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/ranchernamespace"
-	registry "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/registry"
-	setting "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/setting"
-	token "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/token"
-	user "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher2/user"
-	templaterole "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/role/template"
-	classv2 "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/storage/classv2"
+	cloudcredential "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher/cloudcredential"
+	feature "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher/feature"
+	machineconfig "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher/machineconfig"
+	roletemplate "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher/roletemplate"
+	setting "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher/setting"
+	user "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/rancher/user"
+	secret "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/secret/secret"
+	secretsecretv2 "github.com/crossplane-contrib/provider-jet-rancher/internal/controller/secretv2/secret"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		v2.Setup,
-		configactivedirectory.Setup,
-		configadfs.Setup,
-		configazuread.Setup,
-		configfreeipa.Setup,
-		configgithub.Setup,
-		configkeycloak.Setup,
-		configokta.Setup,
-		configopenldap.Setup,
-		configping.Setup,
-		v2catalog.Setup,
-		credential.Setup,
+		token.Setup,
+		app.Setup,
+		appappv2.Setup,
+		multiclusterapp.Setup,
+		activedirectory.Setup,
+		adfs.Setup,
+		azuread.Setup,
+		freeipa.Setup,
+		github.Setup,
+		keycloak.Setup,
+		okta.Setup,
+		openldap.Setup,
+		ping.Setup,
+		catalog.Setup,
+		catalogcatalogv2.Setup,
 		alertgroup.Setup,
 		alertrule.Setup,
+		cluster.Setup,
+		configmap.Setup,
 		driver.Setup,
+		etcdbackup.Setup,
 		logging.Setup,
+		notifier.Setup,
 		roletemplatebinding.Setup,
+		storageclass.Setup,
 		sync.Setup,
 		template.Setup,
-		v2cluster.Setup,
-		mapv2.Setup,
-		backup.Setup,
+		clusterclusterv2.Setup,
 		dns.Setup,
 		dnsprovider.Setup,
 		role.Setup,
 		rolebinding.Setup,
-		configv2.Setup,
-		clusterapp.Setup,
-		drivernode.Setup,
-		pool.Setup,
-		templatenode.Setup,
-		securitypolicytemplate.Setup,
+		nodedriver.Setup,
+		nodepool.Setup,
+		nodetemplate.Setup,
 		alertgroupproject.Setup,
 		alertruleproject.Setup,
-		loggingproject.Setup,
-		roletemplatebindingproject.Setup,
-		providerconfig.Setup,
-		app.Setup,
-		bootstrap.Setup,
-		catalog.Setup,
 		certificate.Setup,
-		cluster.Setup,
-		feature.Setup,
-		notifier.Setup,
+		loggingproject.Setup,
 		project.Setup,
 		ranchernamespace.Setup,
 		registry.Setup,
+		roletemplatebindingproject.Setup,
+		providerconfig.Setup,
+		cloudcredential.Setup,
+		feature.Setup,
+		machineconfig.Setup,
+		roletemplate.Setup,
 		setting.Setup,
-		token.Setup,
 		user.Setup,
-		templaterole.Setup,
-		classv2.Setup,
+		secret.Setup,
+		secretsecretv2.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

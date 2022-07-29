@@ -193,8 +193,15 @@ type LoggingParameters struct {
 	// +kubebuilder:validation:Optional
 	OutputTags map[string]*string `json:"outputTags,omitempty" tf:"output_tags,omitempty"`
 
-	// +kubebuilder:validation:Required
-	ProjectID *string `json:"projectId" tf:"project_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-jet-rancher/apis/project/v1alpha1.Project
+	// +kubebuilder:validation:Optional
+	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ProjectIDRef *v1.Reference `json:"projectIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	SplunkConfig []SplunkConfigParameters `json:"splunkConfig,omitempty" tf:"splunk_config,omitempty"`

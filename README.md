@@ -31,7 +31,7 @@ make submodules
 ```
 
 Run code-generation pipeline:
-```
+```console
 make generate
 ```
 

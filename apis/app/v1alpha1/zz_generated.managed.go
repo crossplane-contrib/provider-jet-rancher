@@ -19,68 +19,68 @@ package v1alpha1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
-// GetCondition of this V2.
-func (mg *V2) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this App.
+func (mg *App) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this V2.
-func (mg *V2) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this App.
+func (mg *App) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetProviderConfigReference of this V2.
-func (mg *V2) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this App.
+func (mg *App) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 /*
-GetProviderReference of this V2.
+GetProviderReference of this App.
 Deprecated: Use GetProviderConfigReference.
 */
-func (mg *V2) GetProviderReference() *xpv1.Reference {
+func (mg *App) GetProviderReference() *xpv1.Reference {
 	return mg.Spec.ProviderReference
 }
 
-// GetPublishConnectionDetailsTo of this V2.
-func (mg *V2) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+// GetPublishConnectionDetailsTo of this App.
+func (mg *App) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
 }
 
-// GetWriteConnectionSecretToReference of this V2.
-func (mg *V2) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this App.
+func (mg *App) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this V2.
-func (mg *V2) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this App.
+func (mg *App) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this V2.
-func (mg *V2) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this App.
+func (mg *App) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetProviderConfigReference of this V2.
-func (mg *V2) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this App.
+func (mg *App) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 /*
-SetProviderReference of this V2.
+SetProviderReference of this App.
 Deprecated: Use SetProviderConfigReference.
 */
-func (mg *V2) SetProviderReference(r *xpv1.Reference) {
+func (mg *App) SetProviderReference(r *xpv1.Reference) {
 	mg.Spec.ProviderReference = r
 }
 
-// SetPublishConnectionDetailsTo of this V2.
-func (mg *V2) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+// SetPublishConnectionDetailsTo of this App.
+func (mg *App) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
 	mg.Spec.PublishConnectionDetailsTo = r
 }
 
-// SetWriteConnectionSecretToReference of this V2.
-func (mg *V2) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this App.
+func (mg *App) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

@@ -1,0 +1,11 @@
+apiVersion: project.rancher.jet.crossplane.io/v1alpha1
+kind: Project
+metadata:
+  name: crossplane-project
+spec:
+  forProvider:
+    clusterId: <rancher cluster id>
+    name: My Awesome Crossplane Project
+    description: Hello Crossplane
+  providerConfigRef:
+    name: default
