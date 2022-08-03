@@ -22,6 +22,7 @@ import (
 
 	"github.com/crossplane-contrib/provider-jet-rancher/config/catalog"
 	"github.com/crossplane-contrib/provider-jet-rancher/config/cluster"
+	"github.com/crossplane-contrib/provider-jet-rancher/config/secret"
 )
 
 const (
@@ -82,6 +83,7 @@ func GetProvider() *tjconfig.Provider {
 		// add custom config functions
 		catalog.Configure,
 		cluster.Configure,
+		secret.Configure,
 	} {
 		configure(pc)
 	}

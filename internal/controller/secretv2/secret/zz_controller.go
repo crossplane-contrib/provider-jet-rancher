@@ -30,12 +30,12 @@ import (
 	"github.com/crossplane/terrajet/pkg/terraform"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1alpha1 "github.com/crossplane-contrib/provider-jet-rancher/apis/secretv2/v1alpha1"
+	v1alpha2 "github.com/crossplane-contrib/provider-jet-rancher/apis/secretv2/v1alpha2"
 )
 
 // Setup adds a controller that reconciles Secret managed resources.
 func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
-	name := managed.ControllerName(v1alpha1.Secret_GroupVersionKind.String())
+	name := managed.ControllerName(v1alpha2.Secret_GroupVersionKind.String())
 	var initializers managed.InitializerChain
 	initializers = append(initializers, managed.NewNameAsExternalName(mgr.GetClient()))
 	cps := []managed.ConnectionPublisher{managed.NewAPISecretPublisher(mgr.GetClient(), mgr.GetScheme())}
@@ -43,7 +43,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		cps = append(cps, connection.NewDetailsManager(mgr.GetClient(), *o.SecretStoreConfigGVK))
 	}
 	r := managed.NewReconciler(mgr,
-		xpresource.ManagedKind(v1alpha1.Secret_GroupVersionKind),
+		xpresource.ManagedKind(v1alpha2.Secret_GroupVersionKind),
 		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["rancher2_secret_v2"])),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
@@ -56,6 +56,6 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		Named(name).
 		WithOptions(o.ForControllerRuntime()).
-		For(&v1alpha1.Secret{}).
+		For(&v1alpha2.Secret{}).
 		Complete(ratelimiter.NewReconciler(name, r, o.GlobalRateLimiter))
 }
